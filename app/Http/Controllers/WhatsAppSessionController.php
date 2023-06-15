@@ -28,19 +28,19 @@ class WhatsAppSessionController extends Controller
     {
         $body = $request->all();
         // Parse params from the webhook verification request
-        $mode = $body["hub.mode"];
-        $token = $body["hub.verify_token"];
-        $challenge = $body["hub.challenge"];
+        //$mode = $body["hub.mode"];
+        //$token = $body["hub.verify_token"];
+        //$challenge = $body["hub.challenge"];
 
-        $mode = $request->hub_mode;
-        $token = $request->hub_verify_token;
-        $challenge = $request->hub_challenge;
+        $mode = $request->input('hub_mode');
+        $token = $request->input('hub_verify_token');
+        $challenge = $request->input('hub_challenge');
 
         // Check the mode and token sent are correct
         if ($mode == "subscribe" && $token == "mapalo") {
             // Respond with 200 OK and challenge token from the request
             echo $challenge;
-            http_response_code(200);
+           // http_response_code(200);
         } else {
             // Responds with '403 Forbidden' if verify tokens do not match
             return response()->json("Fobidden", 403);
