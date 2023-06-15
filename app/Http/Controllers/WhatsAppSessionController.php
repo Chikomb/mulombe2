@@ -32,6 +32,10 @@ class WhatsAppSessionController extends Controller
         $token = $body["hub.verify_token"];
         $challenge = $body["hub.challenge"];
 
+        $mode = $request->hub_mode;
+        $token = $request->hub_verify_token;
+        $challenge = $request->hub_challenge;
+
         // Check the mode and token sent are correct
         if ($mode == "subscribe" && $token == "mapalo") {
             // Respond with 200 OK and challenge token from the request
