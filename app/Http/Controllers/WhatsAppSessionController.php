@@ -402,20 +402,6 @@ class WhatsAppSessionController extends Controller
                         $save_data->save();
 
                         $message_string = "In which Ward do you stay in? \n1. ";
-                    }elseif ($user_message == "2"){
-
-                    }elseif ($user_message == "3"){
-
-                    }elseif ($user_message == "4"){
-
-                    }elseif ($user_message == "5"){
-
-                    }elseif ($user_message == "6"){
-
-                    }elseif ($user_message == "7"){
-
-                    }else{
-
                     }
                 }
                 break;
@@ -424,7 +410,7 @@ class WhatsAppSessionController extends Controller
 
     function sendMessage($message_string, $phone_number, $send_to)
     {
-        $token = "EAAQjlhL9iU4BAJJZAiLD5Q14Es1TkBXZCrmsRJjQdBiHdxIVWfPLuCoZC0S0hrUfaXf0RxVSu1mq6Bv15VHKv5gTXGS433A5ccHUW0gZC74SFt3rVQCkz7rEbkHmEGJGqFR6ccCxjKVzlamxD628x7pwct6z7A98UZAAwxfdGDGOXLwFZAmTjrHdBWpTdDOvc6hePlfPI0gcomZAv2j9DK1";
+        $token = "EAAQjlhL9iU4BACe7HZAPWfBsmXGRr4StM2sVwn2X0pONDhatmXoNMZAaf75zWRMbErtN65wtdMqTClchpwrMILOIQB2jOk1BiLJgSZAcHMnTLlQ73zmZAxDmDX2UIi6ExVslyZC4U8zZAklXX4ZANCZA2MO7dC5ydJAi0LxkaNAW4QvvC2qi8NV5JJsAVeuuYBeXFOxTrW2j06mkyDeu2oEr";
 
         Http::withHeaders([
             'headers' => ['Content-Type' => 'application/json']
@@ -439,7 +425,7 @@ class WhatsAppSessionController extends Controller
 
     function sendImageMessage($message_string, $phone_number, $send_to, $imageURL)
     {
-        $token = "EAAQjlhL9iU4BAJJZAiLD5Q14Es1TkBXZCrmsRJjQdBiHdxIVWfPLuCoZC0S0hrUfaXf0RxVSu1mq6Bv15VHKv5gTXGS433A5ccHUW0gZC74SFt3rVQCkz7rEbkHmEGJGqFR6ccCxjKVzlamxD628x7pwct6z7A98UZAAwxfdGDGOXLwFZAmTjrHdBWpTdDOvc6hePlfPI0gcomZAv2j9DK1";
+        $token = "EAAQjlhL9iU4BACe7HZAPWfBsmXGRr4StM2sVwn2X0pONDhatmXoNMZAaf75zWRMbErtN65wtdMqTClchpwrMILOIQB2jOk1BiLJgSZAcHMnTLlQ73zmZAxDmDX2UIi6ExVslyZC4U8zZAklXX4ZANCZA2MO7dC5ydJAi0LxkaNAW4QvvC2qi8NV5JJsAVeuuYBeXFOxTrW2j06mkyDeu2oEr";
 
         $payload = [
             'messaging_product' => 'whatsapp',
