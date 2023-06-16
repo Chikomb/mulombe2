@@ -48,11 +48,12 @@ class WhatsAppSessionController extends Controller
 
     public function WhatsApp_Bot(Request $request)
     {
+
         $from = "";
         $user_message = "";
         $phone_number = "";
 
-        if($request['entry'][0]['changes'][0]['value']['messages'] !== null)
+        if($request)
         {
             $from = $request['entry'][0]['changes'][0]['value']['messages'][0]['from'];
             $user_message = $request['entry'][0]['changes'][0]['value']['messages'][0]['text']['body'];
@@ -132,7 +133,7 @@ class WhatsAppSessionController extends Controller
                             "step_no" => 1
                         ]);
 
-                        return $this->sendImageMessage($message_string,$phone_number, $from, $imageURL);
+                        return $this->sendMessage($message_string,$phone_number, $from);
 
                     }elseif($case_no == 1 && $step_no == 1 && !empty($user_message)){
 
