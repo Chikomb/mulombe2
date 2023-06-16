@@ -15,15 +15,15 @@ class CreateDataSurveysTable extends Migration
     {
         Schema::create('data_surveys', function (Blueprint $table) {
             $table->id();
-            $table->string('session_id');
-            $table->string('phone_number');
-            $table->string('telecom_operator');
-            $table->string('channel');
-            $table->string('question_number');
-            $table->text('question');
-            $table->string('answer');
-            $table->string('answer_value');
-            $table->string('data_category');
+            $table->string('session_id')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('telecom_operator')->nullable();
+            $table->string('channel')->nullable();
+            $table->string('question_number')->nullable();
+            $table->text('question')->nullable();
+            $table->string('answer')->nullable();
+            $table->string('answer_value')->nullable();
+            $table->string('data_category')->nullable();
             $table->timestamps();
         });
     }

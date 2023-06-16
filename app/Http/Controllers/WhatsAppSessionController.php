@@ -9,6 +9,8 @@ use App\Models\WhatsAppSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
+
 
 
 class WhatsAppSessionController extends Controller
@@ -412,13 +414,15 @@ class WhatsAppSessionController extends Controller
     {
         $token = env('WHATSAPP_TOKEN');
 
-        Http::withHeaders([
+        $send_message = Http::withHeaders([
             'headers' => ['Content-Type' => 'application/json']
         ])->post('https://graph.facebook.com/v12.0/' . $phone_number . '/messages?access_token='.$token, [
             'messaging_product' => 'whatsapp',
             'to' => $send_to,
             'text' => ['body' => $message_string],
         ]);
+
+        Log::info('Send Message', (array)$send_message);
 
         return response('success',200);
     }
@@ -440,11 +444,13 @@ class WhatsAppSessionController extends Controller
             'text' => ['body' => $message_string],
         ];
 
-        Http::withToken($token)
+        $send_image_message = Http::withToken($token)
             ->withHeaders([
                 'Content-Type' => 'application/json'
             ])
             ->post('https://graph.facebook.com/v12.0/' . $phone_number . '/messages', $payload);
+
+        Log::info('Send Image Message', (array)$send_image_message);
 
         return response('success', 200);
     }
