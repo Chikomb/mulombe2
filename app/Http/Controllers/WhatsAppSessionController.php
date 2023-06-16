@@ -48,7 +48,9 @@ class WhatsAppSessionController extends Controller
 
     public function WhatsApp_Bot(Request $request)
     {
-        Log::info('From WhatsAPP', ['response' => $request]);
+        $fromValue = $request['entry'][0]['changes'][0]['value']['messages'][0]['from'];
+        Log::info('From WhatsAPP', ['response' => $fromValue]);
+
         $language = 1;
         $case_no = 1;
         $step_no = 0;
