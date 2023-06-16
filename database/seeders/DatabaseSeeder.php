@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DataCategory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ApiuserSeeder::class);
         $this->call(DataSurveySeeder::class);
         $this->call(LanguageSeeder::class);
+        $this->call(DataCategory::class);
     }
 }
