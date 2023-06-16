@@ -20,7 +20,7 @@ class WhatsAppSessionController extends Controller
         $suffix = time(); // Suffix for the account number (UNIX timestamp)
 
         // Generate a random number between 1000 and 9999
-        $random = rand(10000000, 99999999);
+        $random = rand(100000000000, 999999999999);
 
         // Combine the prefix, random number, and suffix to form the account number
         $payment_reference_number = $prefix . $random;
@@ -48,8 +48,7 @@ class WhatsAppSessionController extends Controller
 
     public function WhatsApp_Bot(Request $request)
     {
-        $fromValue = $request['entry'][0]['changes'][0]['value']['messages'][0]['from'];
-        Log::info('From WhatsAPP', ['response' => $fromValue]);
+        Log::info('From WhatsAPP', ['response' => json_encode($request)]);
 
         $language = 1;
         $case_no = 1;
@@ -159,6 +158,7 @@ class WhatsAppSessionController extends Controller
                     {
                         $message_string = "AKROS na Ministeri ya bulamfula abaaka fiyamba ifiabo. Ukatembula mwiiko ichitatu munakate, efwabuka? \n\n1. Eyo \n2. Teya";
                     }
+
                     $update_session = WhatsAppSession::where('session_id', $session_id)->update([
                         "case_no" => 1,
                         "step_no" => 2
