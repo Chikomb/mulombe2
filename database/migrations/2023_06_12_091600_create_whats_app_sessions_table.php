@@ -20,7 +20,7 @@ class CreateWhatsAppSessionsTable extends Migration
             $table->string("case_no");
             $table->string("step_no");
             $table->string("session_id");
-            $table->boolean("status");
+            $table->boolean("status")->default(0);
             $table->timestamps();
         });
     }
