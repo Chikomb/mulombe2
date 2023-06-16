@@ -59,6 +59,7 @@ class WhatsAppSessionController extends Controller
             $user_message = $request['entry'][0]['changes'][0]['value']['messages'][0]['text']['body'];
             $phone_number = $request['entry'][0]['changes'][0]['value']['metadata']['phone_number_id'];
 
+
             $language = 1;
             $case_no = 1;
             $step_no = 0;
@@ -90,7 +91,7 @@ class WhatsAppSessionController extends Controller
                     $language = $user_message;
                     //update the session details
                     $update_session = WhatsAppSession::where('session_id', $session_id)->update([
-                        "language" => $user_message
+                        "language_id" => $user_message
                     ]);
 
                 }else {
