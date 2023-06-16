@@ -52,7 +52,7 @@ class WhatsAppSessionController extends Controller
         $user_message = "";
         $phone_number = "";
 
-        if(array_key_exists("entry", $request->json()))
+        if($request['entry'][0]['changes'][0]['value']['messages'] !== null)
         {
             $from = $request['entry'][0]['changes'][0]['value']['messages'][0]['from'];
             $user_message = $request['entry'][0]['changes'][0]['value']['messages'][0]['text']['body'];
@@ -418,8 +418,6 @@ class WhatsAppSessionController extends Controller
         }else{
             Log::info('WhatsApp Error', ['no message' => json_encode($request)]);
         }
-
-
 
     }
 
