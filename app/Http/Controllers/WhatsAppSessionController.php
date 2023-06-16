@@ -55,8 +55,9 @@ class WhatsAppSessionController extends Controller
         $case_no = 1;
         $step_no = 0;
         $message_string = "";
-        $user_message = $request->text;
-        $phone_number = $request->phone_number;
+        $from = $request['entry'][0]['changes'][0]['value']['messages'][0]['from'];
+        $user_message = $request['entry'][0]['changes'][0]['value']['messages'][0]['text']['body'];
+        $phone_number = $request['entry'][0]['changes'][0]['value']['metadata']['phone_number_id'];
         $session_id = $this->generateSessionId();
         $data_category = DataCategory::where('is_active', 1)->first()->name;
         $telecom_operator = "Unknown";
@@ -70,7 +71,7 @@ class WhatsAppSessionController extends Controller
         }
 
         //getting last session info
-        $getLastSessionInfor = WhatsAppSession::where('phone_number', $request->from)->where('status', 0)->orderBy('id', 'DESC')->first();
+        $getLastSessionInfor = WhatsAppSession::where('phone_number', $from)->where('status', 0)->orderBy('id', 'DESC')->first();
 
         //checking if there is an active session or not
         if(!empty($getLastSessionInfor)){
@@ -95,7 +96,7 @@ class WhatsAppSessionController extends Controller
         }else{
             //save new session record
             $new_session = WhatsAppSession::create([
-                "phone_number" => $request->from,
+                "phone_number" => $from,
                 "case_no" => 1,
                 "step_no" => 0,
                 "session_id" => $session_id,
@@ -129,7 +130,7 @@ class WhatsAppSessionController extends Controller
                         "step_no" => 1
                     ]);
 
-                    return $this->sendImageMessage($message_string,$phone_number, $request->from, $imageURL);
+                    return $this->sendImageMessage($message_string,$phone_number, $from, $imageURL);
 
         }elseif($case_no == 1 && $step_no == 1 && !empty($user_message)){
 
@@ -163,7 +164,7 @@ class WhatsAppSessionController extends Controller
                         "step_no" => 2
                     ]);
 
-                    return $this->sendMessage($message_string,$phone_number, $request->from);
+                    return $this->sendMessage($message_string,$phone_number, $from);
 
                 }elseif($case_no==1 && $step_no == 2 && !empty($user_message))
                 {
@@ -171,7 +172,7 @@ class WhatsAppSessionController extends Controller
                     {
                         $save_data = DataSurvey::create([
                             "session_id" => $session_id,
-                            "phone_number" => $request->from,
+                            "phone_number" => $from,
                             "channel" => "WhatsApp",
                             "question_number" => "1",
                             "question" => "Akros and Ministry of health are conducting a survey(if there’s need to specify the reason, it shall be done here). If you are 18 years or older and wish to proceed, press 1. if not press 2.",
@@ -190,7 +191,7 @@ class WhatsAppSessionController extends Controller
                             "step_no" => 1
                         ]);
 
-                        return $this->sendMessage($message_string,$phone_number, $request->from);
+                        return $this->sendMessage($message_string,$phone_number, $from);
 
                     }elseif($user_message == "2") //Learn More
                     {
@@ -198,7 +199,7 @@ class WhatsAppSessionController extends Controller
 
                         $save_data = DataSurvey::create([
                             "session_id" => $session_id,
-                            "phone_number" => $request->from,
+                            "phone_number" => $from,
                             "channel" => "WhatsApp",
                             "question_number" => "1",
                             "question" => "Akros and Ministry of health are conducting a survey(if there’s need to specify the reason, it shall be done here). If you are 18 years or older and wish to proceed, press 1. if not press 2.",
@@ -212,7 +213,7 @@ class WhatsAppSessionController extends Controller
 
                         $save_user = DataSurvey::create([
                             "session_id" => $session_id,
-                            "phone_number" => $request->from,
+                            "phone_number" => $from,
                             "channel" => "WhatsApp"
                         ]);
 
@@ -222,7 +223,7 @@ class WhatsAppSessionController extends Controller
                             "status" => 1
                         ]);
 
-                        return $this->sendMessage($message_string,$phone_number, $request->from);
+                        return $this->sendMessage($message_string,$phone_number, $from);
 
                     }else{
                         $message_string = "Akros and Ministry of health are conducting a survey(if there’s need to specify the reason, it shall be done here). If you are 18 years or older and wish to proceed, press 1. if not press 2. \n\n1. Yes \n2. No";
@@ -231,7 +232,7 @@ class WhatsAppSessionController extends Controller
                             "step_no" => 1
                         ]);
 
-                        return $this->sendMessage($message_string,$phone_number, $request->from);
+                        return $this->sendMessage($message_string,$phone_number, $from);
                     }
                 }
                 break;
@@ -240,7 +241,7 @@ class WhatsAppSessionController extends Controller
                 {
                     $save_data = DataSurvey::create([
                         "session_id" => $session_id,
-                        "phone_number" => $request->from,
+                        "phone_number" => $from,
                         "channel" => "WhatsApp",
                         "question_number" => "2",
                         "question" => "What is your age? (Enter in years)",
@@ -259,7 +260,7 @@ class WhatsAppSessionController extends Controller
                         "step_no" => 2
                     ]);
 
-                    return $this->sendMessage($message_string,$phone_number, $request->from);
+                    return $this->sendMessage($message_string,$phone_number, $from);
 
                 }elseif($case_no == 2 && $step_no == 2 && !empty($user_message)){
                     $gender = "Male";
@@ -277,7 +278,7 @@ class WhatsAppSessionController extends Controller
 
                     $save_data = DataSurvey::create([
                         "session_id" => $session_id,
-                        "phone_number" => $request->from,
+                        "phone_number" => $from,
                         "channel" => "WhatsApp",
                         "question_number" => "3",
                         "question" => "What is your gender?",
@@ -296,7 +297,7 @@ class WhatsAppSessionController extends Controller
                         "step_no" => 3
                     ]);
 
-                    return $this->sendMessage($message_string,$phone_number, $request->from);
+                    return $this->sendMessage($message_string,$phone_number, $from);
 
                 }elseif($case_no == 2 && $step_no == 3 && !empty($user_message))
                 {
@@ -304,7 +305,7 @@ class WhatsAppSessionController extends Controller
                         //save the Lusaka district
                         $save_data = DataSurvey::create([
                             "session_id" => $session_id,
-                            "phone_number" => $request->from,
+                            "phone_number" => $from,
                             "channel" => "WhatsApp",
                             "question_number" => "4",
                             "question" => "In which District do you live?",
@@ -323,7 +324,7 @@ class WhatsAppSessionController extends Controller
                             "step_no" => 4
                         ]);
 
-                        return $this->sendMessage($message_string,$phone_number, $request->from);
+                        return $this->sendMessage($message_string,$phone_number, $from);
 
                     }elseif($user_message == "2"){
                         //Kalomo District
@@ -331,7 +332,7 @@ class WhatsAppSessionController extends Controller
 
                         $save_data = DataSurvey::create([
                             "session_id" => $session_id,
-                            "phone_number" => $request->from,
+                            "phone_number" => $from,
                             "channel" => "WhatsApp",
                             "question_number" => "1",
                             "question" => "In which District do you live?",
@@ -350,14 +351,14 @@ class WhatsAppSessionController extends Controller
                             "step_no" => 5
                         ]);
 
-                        return $this->sendMessage($message_string,$phone_number, $request->from);
+                        return $this->sendMessage($message_string,$phone_number, $from);
 
                     }elseif($user_message == "3"){
                         //chavuma District
 
                         $save_data = DataSurvey::create([
                             "session_id" => $session_id,
-                            "phone_number" => $request->from,
+                            "phone_number" => $from,
                             "channel" => "WhatsApp",
                             "question_number" => "4",
                             "question" => "In which District do you live?",
@@ -376,7 +377,7 @@ class WhatsAppSessionController extends Controller
                             "step_no" => 6
                         ]);
 
-                        return $this->sendMessage($message_string,$phone_number, $request->from);
+                        return $this->sendMessage($message_string,$phone_number, $from);
 
                     }else{
                         $message_string = "You have selected an invalid option. \n1. Go Back";
@@ -384,7 +385,7 @@ class WhatsAppSessionController extends Controller
                             "case_no" => 2,
                             "step_no" => 3
                         ]);
-                        return $this->sendMessage($message_string,$phone_number, $request->from);
+                        return $this->sendMessage($message_string,$phone_number, $from);
                     }
 
 
@@ -394,7 +395,7 @@ class WhatsAppSessionController extends Controller
                         //Chawama Constituency
                         $save_data = DataSurvey::create([
                             "session_id" => $session_id,
-                            "phone_number" => $request->from,
+                            "phone_number" => $from,
                             "channel" => "WhatsApp",
                             "question_number" => "5",
                             "question" => "Which constituency do you live in?",
