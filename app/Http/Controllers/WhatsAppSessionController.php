@@ -75,13 +75,13 @@ class WhatsAppSessionController extends Controller
 
         //checking if there is an active session or not
         if(!empty($getLastSessionInfor)){
+            $case_no = $getLastSessionInfor->case_no;
+            $step_no = $getLastSessionInfor->step_no;
+            $session_id = $getLastSessionInfor->session_id;
+
             if($case_no == 1 && $step_no == 1 && !empty($user_message))
             {
-                $case_no = $getLastSessionInfor->case_no;
-                $step_no = $getLastSessionInfor->step_no;
-                $session_id = $getLastSessionInfor->session_id;
                 $language = $user_message;
-
                 //update the session details
                 $update_session = WhatsAppSession::where('session_id', $session_id)->update([
                     "language" => $user_message
