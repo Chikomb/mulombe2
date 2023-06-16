@@ -15,11 +15,11 @@ class CreateWhatsAppSessionsTable extends Migration
     {
         Schema::create('whats_app_sessions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('language_id');
-            $table->string("phone_number");
-            $table->string("case_no");
-            $table->string("step_no");
-            $table->string("session_id");
+            $table->unsignedBigInteger('language_id')->nullable();
+            $table->string("phone_number")->nullable();
+            $table->string("case_no")->nullable();
+            $table->string("step_no")->nullable();
+            $table->string("session_id")->nullable();
             $table->boolean("status")->default(0);
             $table->timestamps();
         });
