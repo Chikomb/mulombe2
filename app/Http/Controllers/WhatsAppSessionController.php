@@ -8,6 +8,8 @@ use App\Models\Language;
 use App\Models\WhatsAppSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Config;
+
 
 class WhatsAppSessionController extends Controller
 {
@@ -26,12 +28,6 @@ class WhatsAppSessionController extends Controller
 
     public function WhatsApp_Verify(Request $request)
     {
-        $body = $request->all();
-        // Parse params from the webhook verification request
-        //$mode = $body["hub.mode"];
-        //$token = $body["hub.verify_token"];
-        //$challenge = $body["hub.challenge"];
-
         $mode = $request->input('hub_mode');
         $token = $request->input('hub_verify_token');
         $challenge = $request->input('hub_challenge');
@@ -414,7 +410,7 @@ class WhatsAppSessionController extends Controller
 
     function sendMessage($message_string, $phone_number, $send_to)
     {
-        $token = "EAAQjlhL9iU4BACe7HZAPWfBsmXGRr4StM2sVwn2X0pONDhatmXoNMZAaf75zWRMbErtN65wtdMqTClchpwrMILOIQB2jOk1BiLJgSZAcHMnTLlQ73zmZAxDmDX2UIi6ExVslyZC4U8zZAklXX4ZANCZA2MO7dC5ydJAi0LxkaNAW4QvvC2qi8NV5JJsAVeuuYBeXFOxTrW2j06mkyDeu2oEr";
+        $token = env('WHATSAPP_TOKEN');
 
         Http::withHeaders([
             'headers' => ['Content-Type' => 'application/json']
@@ -429,7 +425,7 @@ class WhatsAppSessionController extends Controller
 
     function sendImageMessage($message_string, $phone_number, $send_to, $imageURL)
     {
-        $token = "EAAQjlhL9iU4BACe7HZAPWfBsmXGRr4StM2sVwn2X0pONDhatmXoNMZAaf75zWRMbErtN65wtdMqTClchpwrMILOIQB2jOk1BiLJgSZAcHMnTLlQ73zmZAxDmDX2UIi6ExVslyZC4U8zZAklXX4ZANCZA2MO7dC5ydJAi0LxkaNAW4QvvC2qi8NV5JJsAVeuuYBeXFOxTrW2j06mkyDeu2oEr";
+        $token = env('WHATSAPP_TOKEN');
 
         $payload = [
             'messaging_product' => 'whatsapp',
