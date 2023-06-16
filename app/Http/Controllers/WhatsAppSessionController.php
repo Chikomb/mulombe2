@@ -134,6 +134,8 @@ class WhatsAppSessionController extends Controller
                             "step_no" => 1
                         ]);
 
+                        $this->sendImageMessage($phone_number, $from, $imageURL);
+
                         return $this->sendMessage($message_string,$phone_number, $from);
 
                     }elseif($case_no == 1 && $step_no == 1 && !empty($user_message)){
@@ -441,33 +443,23 @@ class WhatsAppSessionController extends Controller
         return response('success',200);
     }
 
-    function sendImageMessage($message_string, $phone_number, $send_to, $imageURL)
+    function sendImageMessage($phone_number, $send_to, $imageURL)
     {
         $token = env('WHATSAPP_TOKEN');
 
-        $payload = [
+        $send_image_message = Http::withHeaders([
+            'headers' => ['Content-Type' => 'application/json']
+        ])->post('https://graph.facebook.com/v12.0/' . $phone_number . '/messages?access_token='.$token, [
             'messaging_product' => 'whatsapp',
             'to' => $send_to,
-            'attachment' => [
-                'type' => 'image',
-                'payload' => [
-                    'url' => $imageURL,
-                    'caption' => $message_string
-                ]
-            ],
-            'text' => ['body' => $message_string],
-        ];
-
-        $send_image_message = Http::withToken($token)
-            ->withHeaders([
-                'Content-Type' => 'application/json'
-            ])
-            ->post('https://graph.facebook.com/v12.0/' . $phone_number . '/messages', $payload);
+            'type' => 'image',
+            'image' => ['link' => $imageURL],
+        ]);
 
         $responseBody = $send_image_message->body();
         Log::info('Send Message', ['response' => $responseBody]);
 
-        return response('success', 200);
+        return response('success',200);
     }
 
 
