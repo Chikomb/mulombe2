@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ApiuserSeeder::class);
         $this->call(DataSurveySeeder::class);
         $this->call(LanguageSeeder::class);
-        $this->call(DataCategory::class);
+        $this->call(DataCategorySeeder::class);
     }
 }
