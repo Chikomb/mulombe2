@@ -48,6 +48,7 @@ class WhatsAppSessionController extends Controller
 
     public function WhatsApp_Bot(Request $request)
     {
+        Log::info('From WhatsAPP', ['response' => $request]);
         $language = 1;
         $case_no = 1;
         $step_no = 0;
@@ -422,7 +423,8 @@ class WhatsAppSessionController extends Controller
             'text' => ['body' => $message_string],
         ]);
 
-        Log::info('Send Message', (array)$send_message);
+        $responseBody = $send_message->body();
+        Log::info('Send Message', ['response' => $responseBody]);
 
         return response('success',200);
     }
@@ -450,7 +452,8 @@ class WhatsAppSessionController extends Controller
             ])
             ->post('https://graph.facebook.com/v12.0/' . $phone_number . '/messages', $payload);
 
-        Log::info('Send Image Message', (array)$send_image_message);
+        $responseBody = $send_image_message->body();
+        Log::info('Send Message', ['response' => $responseBody]);
 
         return response('success', 200);
     }
