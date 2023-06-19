@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\SurveryStatisticsResource;
 use App\Http\Resources\SurveyResource;
 use App\Models\DataSurvey;
 use Carbon\Carbon;
@@ -34,18 +35,18 @@ class APIController extends Controller
         DB::statement("SET sql_mode = ''");
 
         if(!empty($request->start_date) && !empty($request->end_date)){
-            if(!empty($request->channel) && !empty($request->mobile_operator)){
+            if(!empty($request->channel) && !empty($request->telecom_operator)){
                 //both channel and operator
                 //date range
-                $startDate = Carbon::parse($request->start_date)->toDateString();
-                $endDate = Carbon::parse($request->end_date)->toDateString();
+                $startDate = Carbon::parse($request->start_date);
+                $endDate = Carbon::parse($request->end_date);
 
-                $surveys = DataSurvey::whereBetween('created_at', [$startDate, $endDate])->where('channel', $request->channel)->where('mobile_operator', $request->mobile_operator)->
+                $surveys = DataSurvey::whereBetween('created_at', [$startDate, $endDate])->where('channel', $request->channel)->where('telecom_operator', $request->telecom_operator)->
                 groupBy('phone_number')->get();
 
                 $custom_response = [
                     'success' => true,
-                    'message' => 'Filtered by date range from ' . $request->start_date . " to " . $request->end_date.", for ".$request->channel." channel and ".$request->mobile_operator." mobile operator",
+                    'message' => 'Filtered by date range from ' . $request->start_date . " to " . $request->end_date.", for ".$request->channel." channel and ".$request->telecom_operator." mobile operator",
                     'data' => SurveyResource::collection($surveys),
                 ];
 
@@ -54,8 +55,8 @@ class APIController extends Controller
             }elseif(!empty($request->channel)){
                 //get by channel
                 //date range
-                $startDate = Carbon::parse($request->start_date)->toDateString();
-                $endDate = Carbon::parse($request->end_date)->toDateString();
+                $startDate = Carbon::parse($request->start_date);
+                $endDate = Carbon::parse($request->end_date);
 
                 $surveys = DataSurvey::whereBetween('created_at', [$startDate, $endDate])->where('channel', $request->channel)->
                 groupBy('phone_number')->get();
@@ -67,26 +68,26 @@ class APIController extends Controller
                 ];
 
                 return response()->json($custom_response, 200);
-            }elseif(!empty($request->mobile_operator)){
+            }elseif(!empty($request->telecom_operator)){
                 //get by mobile operator
                 //date range
-                $startDate = Carbon::parse($request->start_date)->toDateString();
-                $endDate = Carbon::parse($request->end_date)->toDateString();
+                $startDate = Carbon::parse($request->start_date);
+                $endDate = Carbon::parse($request->end_date);
 
-                $surveys = DataSurvey::whereBetween('created_at', [$startDate, $endDate])->where('mobile_operator', $request->mobile_operator)->
+                $surveys = DataSurvey::whereBetween('created_at', [$startDate, $endDate])->where('telecom_operator', $request->telecom_operator)->
                 groupBy('phone_number')->get();
 
                 $custom_response = [
                     'success' => true,
-                    'message' => 'Filtered by date range from ' . $request->start_date . " to " . $request->end_date.", for ".$request->mobile_operator." mobile operator",
+                    'message' => 'Filtered by date range from ' . $request->start_date . " to " . $request->end_date.", for ".$request->telecom_operator." mobile operator",
                     'data' => SurveyResource::collection($surveys),
                 ];
 
                 return response()->json($custom_response, 200);
             }else{
                 //date range
-                $startDate = Carbon::parse($request->start_date)->toDateString();
-                $endDate = Carbon::parse($request->end_date)->toDateString();
+                $startDate = Carbon::parse($request->start_date);
+                $endDate = Carbon::parse($request->end_date);
 
                 $surveys = DataSurvey::whereBetween('created_at', [$startDate, $endDate])->
                 groupBy('phone_number')->get();
@@ -99,14 +100,14 @@ class APIController extends Controller
 
                 return response()->json($custom_response, 200);
             }
-        }elseif(!empty($request->channel) && !empty($request->mobile_operator)){
+        }elseif(!empty($request->channel) && !empty($request->telecom_operator)){
         //both channel and operator
-            $surveys = DataSurvey::where('channel', $request->channel)->where('mobile_operator', $request->mobile_operator)->
+            $surveys = DataSurvey::where('channel', $request->channel)->where('telecom_operator', $request->telecom_operator)->
             groupBy('phone_number')->get();
 
             $custom_response = [
                 'success' => true,
-                'message' => 'Filtered by ' .$request->channel." channel and ".$request->mobile_operator." mobile operator",
+                'message' => 'Filtered by ' .$request->channel." channel and ".$request->telecom_operator." mobile operator",
                 'data' => SurveyResource::collection($surveys),
             ];
 
@@ -124,14 +125,14 @@ class APIController extends Controller
             ];
 
             return response()->json($custom_response, 200);
-        }elseif(!empty($request->mobile_operator)){
+        }elseif(!empty($request->telecom_operator)){
         //get by mobile operator
-            $surveys = DataSurvey::where('mobile_operator', $request->mobile_operator)->
+            $surveys = DataSurvey::where('telecom_operator', $request->telecom_operator)->
             groupBy('phone_number')->get();
 
             $custom_response = [
                 'success' => true,
-                'message' => 'Filtered by ' .$request->mobile_operator." mobile operator",
+                'message' => 'Filtered by ' .$request->telecom_operator." mobile operator",
                 'data' => SurveyResource::collection($surveys),
             ];
 
@@ -149,8 +150,9 @@ class APIController extends Controller
 
     public function statistics()
     {
+        DB::statement("SET sql_mode = ''");
         $surveys = DataSurvey::groupBy('phone_number')->get();
 
-        return SurveyResource::collection($surveys);
+        return SurveryStatisticsResource::collection($surveys);
     }
 }

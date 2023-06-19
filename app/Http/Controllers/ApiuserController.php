@@ -31,7 +31,7 @@ class ApiuserController extends Controller
                     "datetime" =>now()
                 ];
 
-                return response()->json($custom_request, 400);
+                return response()->json($custom_request, 200);
 
             }else{
                 $custom_request = [

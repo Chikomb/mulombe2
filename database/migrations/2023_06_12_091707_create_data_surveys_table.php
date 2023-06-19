@@ -19,6 +19,7 @@ class CreateDataSurveysTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('telecom_operator')->nullable();
             $table->string('channel')->nullable();
+            $table->unsignedBigInteger('language_id')->default(1);
             $table->string('question_number')->nullable();
             $table->text('question')->nullable();
             $table->string('answer')->nullable();

@@ -14,6 +14,7 @@ class DataSurvey extends Model
         'phone_number',
         'telecom_operator',
         'channel',
+        'language_id',
         'question_number',
         'question',
         'answer',

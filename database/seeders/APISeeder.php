@@ -15,7 +15,12 @@ class APISeeder extends Seeder
      */
     public function run()
     {
-
-
+        DB::table('users')->insert([
+            [
+                'name' => 'Super Admin',
+                'email' => 'super@ontech.co.zm',
+                'password' => Hash::make('Admin.1234')
+            ]
+        ]);
     }
 }

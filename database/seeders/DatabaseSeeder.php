@@ -19,5 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(DataSurveySeeder::class);
         $this->call(LanguageSeeder::class);
         $this->call(DataCategorySeeder::class);
+        $this->call(APISeeder::class);
     }
 }
