@@ -520,35 +520,35 @@ class WhatsAppSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                $error_message_string = "You have selected an invalid option. \n";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                $error_message_string = "You have selected an invalid option. \n";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                $error_message_string = "You have selected an invalid option. \n";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                $error_message_string = "You have selected an invalid option. \n";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
                             } elseif ($language == 5) //lozi
                             {
                                 $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                $error_message_string = "You have selected an invalid option. \n";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                $error_message_string = "You have selected an invalid option. \n";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                $error_message_string = "You have selected an invalid option. \n";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                $error_message_string = "You have selected an invalid option. \n";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
                             }
 
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
