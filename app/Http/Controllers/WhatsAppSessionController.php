@@ -114,7 +114,7 @@ class WhatsAppSessionController extends Controller
                     if($case_no == 1 && $step_no == 0){
                         $geLanguages = Language::where('is_active', 1)->get();
 
-                        $language_menu = "Akros and Ministry of health are conducting a survey. Choose language";
+                        $language_menu = "*Akros and Ministry of health are conducting a survey. Choose language*";
 
                         $lists = $geLanguages;
                         $counter = 1;
