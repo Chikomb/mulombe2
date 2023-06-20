@@ -141,34 +141,34 @@ class WhatsAppSessionController extends Controller
 
                         if ($language == 1) //english
                         {
-                            $message_string = "AKROS and Ministry of health are conducting a survey. If you are 18 years or older and wish to proceed?. \n\n1. Yes \n2. No";
+                            $message_string = "*AKROS and Ministry of health are conducting a survey. If you are 18 years or older and wish to proceed?.* \n\n1. Yes \n2. No";
                         } elseif ($language == 2) //nyanja
                         {
-                            $message_string = "AKROS ndi Unduna wa Zaumoyo akuchita kafukufuku. Ngati muli ndi zaka khumi ndi zisanu ndi zitatu kapena kuposerapo ndipo mukufuna kupitiriza? . \n\n1. Inde \n2. Ayi";
+                            $message_string = "*AKROS ndi Unduna wa Zaumoyo akuchita kafukufuku. Ngati muli ndi zaka khumi ndi zisanu ndi zitatu kapena kuposerapo ndipo mukufuna kupitiriza?.* \n\n1. Inde \n2. Ayi";
                             $chosen_language = "Nyanja";
                         } elseif ($language == 3) //bemba
                         {
-                            $message_string = "AKROS na Ministry of Health balifye uma ukulandafye umutende. Ngabakwata umwaka umo na fwela, nafimbi ukupeza ifikolwe? \n\n1. Endita mukwai \n2. Iyo mukwai";
+                            $message_string = "*AKROS na Ministry of Health balifye uma ukulandafye umutende. Ngabakwata umwaka umo na fwela, nafimbi ukupeza ifikolwe?* \n\n1. Endita mukwai \n2. Iyo mukwai";
                             $chosen_language = "Bemba";
                         } elseif ($language == 4) //tonga
                         {
-                            $message_string = "Ai AKROS na Ministry of Health 'a kufutisa insala. Bula kuukata tinebo kumalukula 18 uku mukufyala kukukolokoti? \n\n1. Ee \n2. Awe";
+                            $message_string = "*Ai AKROS na Ministry of Health 'a kufutisa insala. Bula kuukata tinebo kumalukula 18 uku mukufyala kukukolokoti?* \n\n1. Ee \n2. Awe";
                             $chosen_language = "Tonga";
                         } elseif ($language == 5) //lozi
                         {
-                            $message_string = "Akros niba liluko la makete (Ministry of Health) basweli kueza patisiso kuamana nibutata bobutisizwe ki butuku bwa Covid 19 kwa sicaba mwa naha Zambia. Haiba munani ni lilimo ze 18 kuya fahalimu mi mubata kuzwela pili, \n\n1. Eni \n2. Batili";
+                            $message_string = "*Akros niba liluko la makete (Ministry of Health) basweli kueza patisiso kuamana nibutata bobutisizwe ki butuku bwa Covid 19 kwa sicaba mwa naha Zambia. Haiba munani ni lilimo ze 18 kuya fahalimu mi mubata kuzwela pili,* \n\n1. Eni \n2. Batili";
                             $chosen_language = "Lozi";
                         } elseif ($language == 6) //lunda
                         {
-                            $message_string = "AKROS na Ministry ya Musokolwa ishasha utusokolwa. Nkashi lwandi watau masumu ya mundu kumweni kumukasanga? \n\n1. Ehe \n2. Hae";
+                            $message_string = "*AKROS na Ministry ya Musokolwa ishasha utusokolwa. Nkashi lwandi watau masumu ya mundu kumweni kumukasanga?* \n\n1. Ehe \n2. Hae";
                             $chosen_language = "Lunda";
                         } elseif ($language == 7) //luvale
                         {
-                            $message_string = "AKROS na Mutundu wa Mbeu aveba shingwana shikongomelo. Uta landa vata ka mavilu kumabili na mwikaji, elacitandale? \n\n1. Eyo \n2. Teya";
+                            $message_string = "*AKROS na Mutundu wa Mbeu aveba shingwana shikongomelo. Uta landa vata ka mavilu kumabili na mwikaji, elacitandale?* \n\n1. Eyo \n2. Teya";
                             $chosen_language = "Luvale";
                         } elseif ($language == 8) //kaonde
                         {
-                            $message_string = "AKROS na Ministeri ya bulamfula abaaka fiyamba ifiabo. Ukatembula mwiiko ichitatu munakate, efwabuka? \n\n1. Eyo \n2. Teya";
+                            $message_string = "*AKROS na Ministeri ya bulamfula abaaka fiyamba ifiabo. Ukatembula mwiiko ichitatu munakate, efwabuka?* \n\n1. Eyo \n2. Teya";
                             $chosen_language = "Kaonde";
                         }
 
@@ -182,7 +182,7 @@ class WhatsAppSessionController extends Controller
                         return $this->sendMessage($message_string, $phone_number, $from);
 
                     } elseif ($case_no == 1 && $step_no == 2 && !empty($user_message)) {
-                        if ($user_message == "1")// register account
+                        if($user_message == "1")// register account
                         {
                             $save_data = DataSurvey::create([
                                 "session_id" => $session_id,
@@ -230,8 +230,6 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 1
                             ]);
 
-                            return $this->sendMessage($message_string, $phone_number, $from);
-
                         } elseif ($user_message == "2") //Learn More
                         {
                             $message_string = "Thank you for your input, have a nice day";
@@ -239,6 +237,7 @@ class WhatsAppSessionController extends Controller
                             $save_data = DataSurvey::create([
                                 "session_id" => $session_id,
                                 "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
                                 "channel" => "WhatsApp",
                                 "question_number" => "1",
                                 "question" => "Akros and Ministry of health are conducting a survey(if there’s need to specify the reason, it shall be done here). If you are 18 years or older and wish to proceed, press 1. if not press 2.",
@@ -262,8 +261,6 @@ class WhatsAppSessionController extends Controller
                                 "status" => 1
                             ]);
 
-                            return $this->sendMessage($message_string, $phone_number, $from);
-
                         } else {
                             $message_string = "Akros and Ministry of health are conducting a survey(if there’s need to specify the reason, it shall be done here). If you are 18 years or older and wish to proceed, press 1. if not press 2. \n\n1. Yes \n2. No";
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
@@ -271,8 +268,8 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 1
                             ]);
 
-                            return $this->sendMessage($message_string, $phone_number, $from);
                         }
+                        return $this->sendMessage($message_string, $phone_number, $from);
                     }
                     break;
                 case '2':
