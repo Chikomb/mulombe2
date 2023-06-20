@@ -182,7 +182,7 @@ class WhatsAppSessionController extends Controller
                         return $this->sendMessage($message_string, $phone_number, $from);
 
                     } elseif ($case_no == 1 && $step_no == 2 && !empty($user_message)) {
-                        if($user_message == "1")// register account
+                        if($user_message == "1" || $user_message == 1)// register account
                         {
                             $save_data = DataSurvey::create([
                                 "session_id" => $session_id,
@@ -232,7 +232,7 @@ class WhatsAppSessionController extends Controller
 
                             return $this->sendMessage($message_string, $phone_number, $from);
 
-                        } elseif ($user_message == "2") //Learn More
+                        } elseif ($user_message == "2" || $user_message == 2) //Learn More
                         {
 
                             if ($language == 1) //english
