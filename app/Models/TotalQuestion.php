@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class TotalQuestion extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'channel',
+        'total_questions'
+    ];
 }

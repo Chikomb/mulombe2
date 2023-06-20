@@ -16,7 +16,7 @@ class APIController extends Controller
     //get all surveys
     public function all_surveys()
     {
-        //DB::statement("SET sql_mode = ''");
+        DB::statement("SET sql_mode = ''");
 
         $surveys = DataSurvey::groupBy('phone_number')->get();
         $participant_count = DataSurvey::groupBy('phone_number')->count();

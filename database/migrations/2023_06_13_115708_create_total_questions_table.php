@@ -15,6 +15,8 @@ class CreateTotalQuestionsTable extends Migration
     {
         Schema::create('total_questions', function (Blueprint $table) {
             $table->id();
+            $table->string('channel');
+            $table->integer('total_questions');
             $table->timestamps();
         });
     }

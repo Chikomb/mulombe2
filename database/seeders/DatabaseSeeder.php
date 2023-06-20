@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguageSeeder::class);
         $this->call(DataCategorySeeder::class);
         $this->call(APISeeder::class);
+        $this->call(TotalQuestionSeeder::class);
     }
 }
