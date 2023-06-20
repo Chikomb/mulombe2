@@ -111,7 +111,7 @@ class WhatsAppSessionController extends Controller
                     if ($case_no == 1 && $step_no == 0) {
                         $geLanguages = Language::where('is_active', 1)->get();
 
-                        $language_menu = "*Akros and Ministry of health are conducting a survey. Choose language*\n\n";
+                        $language_menu = "*Akros and Ministry of health are conducting a survey. Choose language*\n";
 
                         $lists = $geLanguages;
                         $counter = 1;
@@ -178,7 +178,7 @@ class WhatsAppSessionController extends Controller
                         ]);
 
                         $ticked_language = $chosen_language." ✔️ ";
-                        $selected_language = $this->sendMessage($ticked_language, $phone_number, $from);
+                        $selected_language = $this->sendMessage($user_message, $phone_number, $from);
                         return $this->sendMessage($message_string, $phone_number, $from);
 
                     } elseif ($case_no == 1 && $step_no == 2 && !empty($user_message)) {
