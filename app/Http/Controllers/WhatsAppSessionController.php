@@ -83,6 +83,7 @@ class WhatsAppSessionController extends Controller
                 $case_no = $getLastSessionInfor->case_no;
                 $step_no = $getLastSessionInfor->step_no;
                 $session_id = $getLastSessionInfor->session_id;
+                $language = $getLastSessionInfor->language_id;
 
                 if ($case_no == 1 && $step_no == 1 && !empty($user_message)) {
                     $language = $user_message;
@@ -91,9 +92,8 @@ class WhatsAppSessionController extends Controller
                         "language_id" => $user_message
                     ]);
 
-                } else {
-                    $language = $getLastSessionInfor->language;
                 }
+
             } else {
                 //save new session record
                 $new_session = WhatsAppSession::create([
