@@ -201,28 +201,28 @@ class WhatsAppSessionController extends Controller
 
                             if ($language == 1) //english
                             {
-                                $message_string = "What is your age? (Enter in years)".$language;
+                                $message_string = "What is your age? (Enter in years)";
                             } elseif ($language == 2) //nyanja
                             {
-                                $message_string = "What is your age? (Enter in years)".$language;
+                                $message_string = "What is your age? (Enter in years)";
                             } elseif ($language == 3) //bemba
                             {
-                                $message_string = "What is your age? (Enter in years)".$language;
+                                $message_string = "What is your age? (Enter in years)";
                             } elseif ($language == 4) //tonga
                             {
-                                $message_string = "What is your age? (Enter in years)".$language;
+                                $message_string = "What is your age? (Enter in years)";
                             } elseif ($language == 5) //lozi
                             {
-                                $message_string = "Munani lilimo zekai (mun’ole lilimo) \n\n".$language;
+                                $message_string = "Munani lilimo zekai (mun’ole lilimo) \n\n";
                             } elseif ($language == 6) //lunda
                             {
-                                $message_string = "What is your age? (Enter in years)".$language;
+                                $message_string = "What is your age? (Enter in years)";
                             } elseif ($language == 7) //luvale
                             {
-                                $message_string = "What is your age? (Enter in years)".$language;
+                                $message_string = "What is your age? (Enter in years)";
                             } elseif ($language == 8) //kaonde
                             {
-                                $message_string = "What is your age? (Enter in years)".$language;
+                                $message_string = "What is your age? (Enter in years)";
                             }
 
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
@@ -234,7 +234,32 @@ class WhatsAppSessionController extends Controller
 
                         } elseif ($user_message == "2") //Learn More
                         {
-                            $message_string = "Thank you for your input, have a nice day";
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "Thank you for your input, have a nice day";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "Thank you for your input, have a nice day";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "Thank you for your input, have a nice day";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "Thank you for your input, have a nice day";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "Thank you for your input, have a nice day";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "Thank you for your input, have a nice day";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "Thank you for your input, have a nice day";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "Thank you for your input, have a nice day";
+                            }
 
                             $save_data = DataSurvey::create([
                                 "session_id" => $session_id,
@@ -251,12 +276,6 @@ class WhatsAppSessionController extends Controller
 
                             $save_data->save();
 
-                            $save_user = DataSurvey::create([
-                                "session_id" => $session_id,
-                                "phone_number" => $from,
-                                "channel" => "WhatsApp"
-                            ]);
-
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
                                 "case_no" => 2,
                                 "step_no" => 1,
@@ -266,7 +285,32 @@ class WhatsAppSessionController extends Controller
                             return $this->sendMessage($message_string, $phone_number, $from);
 
                         } else {
-                            $message_string = "Akros and Ministry of health are conducting a survey(if there’s need to specify the reason, it shall be done here). If you are 18 years or older and wish to proceed, press 1. if not press 2. \n\n1. Yes \n2. No";
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*AKROS and Ministry of health are conducting a survey. If you are 18 years or older and wish to proceed?.* \n\n1. Yes \n2. No";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*AKROS ndi Unduna wa Zaumoyo akuchita kafukufuku. Ngati muli ndi zaka khumi ndi zisanu ndi zitatu kapena kuposerapo ndipo mukufuna kupitiriza?.* \n\n1. Inde \n2. Ayi";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*AKROS na Ministry of Health balifye uma ukulandafye umutende. Ngabakwata umwaka umo na fwela, nafimbi ukupeza ifikolwe?* \n\n1. Endita mukwai \n2. Iyo mukwai";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Ai AKROS na Ministry of Health 'a kufutisa insala. Bula kuukata tinebo kumalukula 18 uku mukufyala kukukolokoti?* \n\n1. Ee \n2. Awe";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*Akros niba liluko la makete (Ministry of Health) basweli kueza patisiso kuamana nibutata bobutisizwe ki butuku bwa Covid 19 kwa sicaba mwa naha Zambia. Haiba munani ni lilimo ze 18 kuya fahalimu mi mubata kuzwela pili,* \n\n1. Eni \n2. Batili";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*AKROS na Ministry ya Musokolwa ishasha utusokolwa. Nkashi lwandi watau masumu ya mundu kumweni kumukasanga?* \n\n1. Ehe \n2. Hae";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*AKROS na Mutundu wa Mbeu aveba shingwana shikongomelo. Uta landa vata ka mavilu kumabili na mwikaji, elacitandale?* \n\n1. Eyo \n2. Teya";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*AKROS na Ministeri ya bulamfula abaaka fiyamba ifiabo. Ukatembula mwiiko ichitatu munakate, efwabuka?* \n\n1. Eyo \n2. Teya";
+                            }
+
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
                                 "case_no" => 1,
                                 "step_no" => 1
@@ -283,6 +327,7 @@ class WhatsAppSessionController extends Controller
                         $save_data = DataSurvey::create([
                             "session_id" => $session_id,
                             "phone_number" => $from,
+                            "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
                             "channel" => "WhatsApp",
                             "question_number" => "2",
                             "question" => "What is your age? (Enter in years)",
@@ -294,7 +339,31 @@ class WhatsAppSessionController extends Controller
 
                         $save_data->save();
 
-                        $message_string = "What is your gender \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                        if ($language == 1) //english
+                        {
+                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                        } elseif ($language == 2) //nyanja
+                        {
+                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                        } elseif ($language == 3) //bemba
+                        {
+                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                        } elseif ($language == 4) //tonga
+                        {
+                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                        } elseif ($language == 5) //lozi
+                        {
+                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                        } elseif ($language == 6) //lunda
+                        {
+                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                        } elseif ($language == 7) //luvale
+                        {
+                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                        } elseif ($language == 8) //kaonde
+                        {
+                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                        }
 
                         $update_session = WhatsAppSession::where('session_id', $session_id)->update([
                             "case_no" => 2,
@@ -320,6 +389,7 @@ class WhatsAppSessionController extends Controller
                         $save_data = DataSurvey::create([
                             "session_id" => $session_id,
                             "phone_number" => $from,
+                            "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
                             "channel" => "WhatsApp",
                             "question_number" => "3",
                             "question" => "What is your gender?",
@@ -331,7 +401,31 @@ class WhatsAppSessionController extends Controller
 
                         $save_data->save();
 
-                        $message_string = "In which District do you live? \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                        if ($language == 1) //english
+                        {
+                            $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                        } elseif ($language == 2) //nyanja
+                        {
+                            $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                        } elseif ($language == 3) //bemba
+                        {
+                            $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                        } elseif ($language == 4) //tonga
+                        {
+                            $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                        } elseif ($language == 5) //lozi
+                        {
+                            $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                        } elseif ($language == 6) //lunda
+                        {
+                            $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                        } elseif ($language == 7) //luvale
+                        {
+                            $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                        } elseif ($language == 8) //kaonde
+                        {
+                            $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                        }
 
                         $update_session = WhatsAppSession::where('session_id', $session_id)->update([
                             "case_no" => 2,
@@ -420,11 +514,49 @@ class WhatsAppSessionController extends Controller
                             return $this->sendMessage($message_string, $phone_number, $from);
 
                         } else {
-                            $message_string = "You have selected an invalid option. \n1. Go Back";
+                            //craft the error message and display the previous question
+                            $error_message_string = "";
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                                $error_message_string = "You have selected an invalid option. \n";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                                $error_message_string = "You have selected an invalid option. \n";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                                $error_message_string = "You have selected an invalid option. \n";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                                $error_message_string = "You have selected an invalid option. \n";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                                $error_message_string = "You have selected an invalid option. \n";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                                $error_message_string = "You have selected an invalid option. \n";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                                $error_message_string = "You have selected an invalid option. \n";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                                $error_message_string = "You have selected an invalid option. \n";
+                            }
+
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
                                 "case_no" => 2,
                                 "step_no" => 3
                             ]);
+
+                            $send_error_message = $this->sendImageMessage($error_message_string, $phone_number, $from);
                             return $this->sendMessage($message_string, $phone_number, $from);
                         }
 
