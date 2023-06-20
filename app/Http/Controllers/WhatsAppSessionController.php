@@ -230,6 +230,8 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 1
                             ]);
 
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
                         } elseif ($user_message == "2") //Learn More
                         {
                             $message_string = "Thank you for your input, have a nice day";
@@ -261,6 +263,8 @@ class WhatsAppSessionController extends Controller
                                 "status" => 1
                             ]);
 
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
                         } else {
                             $message_string = "Akros and Ministry of health are conducting a survey(if there’s need to specify the reason, it shall be done here). If you are 18 years or older and wish to proceed, press 1. if not press 2. \n\n1. Yes \n2. No";
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
@@ -268,8 +272,10 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 1
                             ]);
 
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
                         }
-                        return $this->sendMessage($message_string, $phone_number, $from);
+
                     }
                     break;
                 case '2':
