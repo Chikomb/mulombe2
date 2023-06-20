@@ -135,7 +135,7 @@ class WhatsAppSessionController extends Controller
 
                         return $this->sendMessage($message_string, $phone_number, $from);
 
-                    } elseif ($case_no == 1 && $step_no == 1 && !empty($user_message)) {
+                    } elseif ($case_no == 1 && $step_no == 1 && !empty($user_message) && is_numeric($user_message)) {
 
                         $chosen_language = "English";
 
@@ -181,7 +181,7 @@ class WhatsAppSessionController extends Controller
                         $selected_language = $this->sendMessage($ticked_language, $phone_number, $from);
                         return $this->sendMessage($message_string, $phone_number, $from);
 
-                    } elseif ($case_no == 1 && $step_no == 2 && !empty($user_message)) {
+                    } elseif ($case_no == 1 && $step_no == 2 && !empty($user_message) && is_numeric($user_message)) {
                         if($user_message == "1" || $user_message == 1)// register account
                         {
                             $save_data = DataSurvey::create([
@@ -323,54 +323,108 @@ class WhatsAppSessionController extends Controller
                     }
                     break;
                 case '2':
-                    if ($case_no == 2 && $step_no == 1 && !empty($user_message)) {
-                        $save_data = DataSurvey::create([
-                            "session_id" => $session_id,
-                            "phone_number" => $from,
-                            "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
-                            "channel" => "WhatsApp",
-                            "question_number" => "2",
-                            "question" => "What is your age? (Enter in years)",
-                            "answer" => $user_message,
-                            "answer_value" => $user_message,
-                            "telecom_operator" => $telecom_operator,
-                            "data_category" => $data_category
-                        ]);
+                    if ($case_no == 2 && $step_no == 1 && !empty($user_message) && is_numeric($user_message)) {
+                        //validate the age entered
+                        if($user_message >= 18) {
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "2",
+                                "question" => "What is your age? (Enter in years)",
+                                "answer" => $user_message,
+                                "answer_value" => $user_message,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
 
-                        $save_data->save();
+                            $save_data->save();
 
-                        if ($language == 1) //english
-                        {
-                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                        } elseif ($language == 2) //nyanja
-                        {
-                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                        } elseif ($language == 3) //bemba
-                        {
-                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                        } elseif ($language == 4) //tonga
-                        {
-                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                        } elseif ($language == 5) //lozi
-                        {
-                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                        } elseif ($language == 6) //lunda
-                        {
-                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                        } elseif ($language == 7) //luvale
-                        {
-                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                        } elseif ($language == 8) //kaonde
-                        {
-                            $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 2,
+                                "step_no" => 2
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+                        }else{
+                            //if entered age is less than 18 years old
+                            if ($language == 1) //english
+                            {
+                                $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                            }
+
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "1",
+                                "question" => "Akros and Ministry of health are conducting a survey(if there’s need to specify the reason, it shall be done here). If you are 18 years or older and wish to proceed, press 1. if not press 2.",
+                                "answer" => "2",
+                                "answer_value" => $user_message,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 2,
+                                "step_no" => 1,
+                                "status" => 1
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
                         }
-
-                        $update_session = WhatsAppSession::where('session_id', $session_id)->update([
-                            "case_no" => 2,
-                            "step_no" => 2
-                        ]);
-
-                        return $this->sendMessage($message_string, $phone_number, $from);
 
                     } elseif ($case_no == 2 && $step_no == 2 && !empty($user_message)) {
                         $gender = "Male";
