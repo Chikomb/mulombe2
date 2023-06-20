@@ -178,7 +178,7 @@ class WhatsAppSessionController extends Controller
                         ]);
 
                         $ticked_language = $chosen_language." ✔️ ";
-                        $selected_language = $this->sendMessage($user_message, $phone_number, $from);
+                        $selected_language = $this->sendMessage($ticked_language, $phone_number, $from);
                         return $this->sendMessage($message_string, $phone_number, $from);
 
                     } elseif ($case_no == 1 && $step_no == 2 && !empty($user_message)) {
@@ -201,28 +201,28 @@ class WhatsAppSessionController extends Controller
 
                             if ($language == 1) //english
                             {
-                                $message_string = "What is your age? (Enter in years)";
+                                $message_string = "What is your age? (Enter in years)".$language;
                             } elseif ($language == 2) //nyanja
                             {
-                                $message_string = "What is your age? (Enter in years)";
+                                $message_string = "What is your age? (Enter in years)".$language;
                             } elseif ($language == 3) //bemba
                             {
-                                $message_string = "What is your age? (Enter in years)";
+                                $message_string = "What is your age? (Enter in years)".$language;
                             } elseif ($language == 4) //tonga
                             {
-                                $message_string = "What is your age? (Enter in years)";
+                                $message_string = "What is your age? (Enter in years)".$language;
                             } elseif ($language == 5) //lozi
                             {
-                                $message_string = "Munani lilimo zekai (mun’ole lilimo) \n\n";
+                                $message_string = "Munani lilimo zekai (mun’ole lilimo) \n\n".$language;
                             } elseif ($language == 6) //lunda
                             {
-                                $message_string = "What is your age? (Enter in years)";
+                                $message_string = "What is your age? (Enter in years)".$language;
                             } elseif ($language == 7) //luvale
                             {
-                                $message_string = "What is your age? (Enter in years)";
+                                $message_string = "What is your age? (Enter in years)".$language;
                             } elseif ($language == 8) //kaonde
                             {
-                                $message_string = "What is your age? (Enter in years)";
+                                $message_string = "What is your age? (Enter in years)".$language;
                             }
 
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
