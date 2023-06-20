@@ -177,7 +177,7 @@ class WhatsAppSessionController extends Controller
                             "step_no" => 2
                         ]);
 
-                        $ticked_language = $chosen_language." ✔️ ";
+                        $ticked_language = $chosen_language." ✅ ";
                         $selected_language = $this->sendMessage($ticked_language, $phone_number, $from);
                         return $this->sendMessage($message_string, $phone_number, $from);
 
@@ -435,11 +435,12 @@ class WhatsAppSessionController extends Controller
                         return $this->sendMessage($message_string, $phone_number, $from);
 
                     } elseif ($case_no == 2 && $step_no == 3 && !empty($user_message)) {
-                        if ($user_message == "1") {
+                        if ($user_message == "1" || $user_message == 1) {
                             //save the Lusaka district
                             $save_data = DataSurvey::create([
                                 "session_id" => $session_id,
                                 "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
                                 "channel" => "WhatsApp",
                                 "question_number" => "4",
                                 "question" => "In which District do you live?",
@@ -451,7 +452,31 @@ class WhatsAppSessionController extends Controller
 
                             $save_data->save();
 
-                            $message_string = "Which constituency do you live in? \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            }
 
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
                                 "case_no" => 2,
@@ -467,6 +492,7 @@ class WhatsAppSessionController extends Controller
                             $save_data = DataSurvey::create([
                                 "session_id" => $session_id,
                                 "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
                                 "channel" => "WhatsApp",
                                 "question_number" => "1",
                                 "question" => "In which District do you live?",
@@ -493,6 +519,7 @@ class WhatsAppSessionController extends Controller
                             $save_data = DataSurvey::create([
                                 "session_id" => $session_id,
                                 "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
                                 "channel" => "WhatsApp",
                                 "question_number" => "4",
                                 "question" => "In which District do you live?",
@@ -562,14 +589,15 @@ class WhatsAppSessionController extends Controller
 
 
                     } elseif ($case_no == 2 && $step_no == 4 && !empty($user_message)) {
-                        if ($user_message == "1") {
+                        if ($user_message == "1" || $user_message == 1) {
                             //Chawama Constituency
                             $save_data = DataSurvey::create([
                                 "session_id" => $session_id,
                                 "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
                                 "channel" => "WhatsApp",
                                 "question_number" => "5",
-                                "question" => "Which constituency do you live in?",
+                                "question" => "In which Constituency do you stay in?",
                                 "answer" => "1",
                                 "answer_value" => "Chawama",
                                 "telecom_operator" => $telecom_operator,
@@ -578,10 +606,567 @@ class WhatsAppSessionController extends Controller
 
                             $save_data->save();
 
-                            $message_string = "In which Ward do you stay in? \n1. ";
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Nkoloma\n2. Chawama\n3.John Howard\n5.Lilayi\n6. _Other(please specify)_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Nkoloma\n2. Chawama\n3.John Howard\n5.Lilayi\n6. _Other(please specify)_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Nkoloma\n2. Chawama\n3.John Howard\n5.Lilayi\n6. _Other(please specify)_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Nkoloma\n2. Chawama\n3.John Howard\n5.Lilayi\n6. _Other(please specify)_";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Nkoloma\n2. Chawama\n3.John Howard\n5.Lilayi\n6. _Other(please specify)_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Nkoloma\n2. Chawama\n3.John Howard\n5.Lilayi\n6. _Other(please specify)_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Nkoloma\n2. Chawama\n3.John Howard\n5.Lilayi\n6. _Other(please specify)_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Nkoloma\n2. Chawama\n3.John Howard\n5.Lilayi\n6. _Other(please specify)_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 3,
+                                "step_no" => 1
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }elseif($user_message == "2" || $user_message == 2) {
+                            //Kabwata
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "5",
+                                "question" => "In which Constituency do you stay in?",
+                                "answer" => "2",
+                                "answer_value" => "Kabwata",
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kamwala\n2. Kabwata\n3. Libala\n5. Chilenje\n6. Kamulanga\n7. _Other(please specify)_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kamwala\n2. Kabwata\n3. Libala\n5. Chilenje\n6. Kamulanga\n7. _Other(please specify)_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kamwala\n2. Kabwata\n3. Libala\n5. Chilenje\n6. Kamulanga\n7. _Other(please specify)_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kamwala\n2. Kabwata\n3. Libala\n5. Chilenje\n6. Kamulanga\n7. _Other(please specify)_";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kamwala\n2. Kabwata\n3. Libala\n5. Chilenje\n6. Kamulanga\n7. _Other(please specify)_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kamwala\n2. Kabwata\n3. Libala\n5. Chilenje\n6. Kamulanga\n7. _Other(please specify)_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kamwala\n2. Kabwata\n3. Libala\n5. Chilenje\n6. Kamulanga\n7. _Other(please specify)_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kamwala\n2. Kabwata\n3. Libala\n5. Chilenje\n6. Kamulanga\n7. _Other(please specify)_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 3,
+                                "step_no" => 2
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }elseif ($user_message == "3" || $user_message == 3){
+                            //Kanyama
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "5",
+                                "question" => "In which Constituency do you stay in?",
+                                "answer" => "3",
+                                "answer_value" => "Kanyama",
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kanyama\n2. Harry Mwanga Nkumbula\n3. Munkolo\n5. _Other(please specify)_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kanyama\n2. Harry Mwanga Nkumbula\n3. Munkolo\n5. _Other(please specify)_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kanyama\n2. Harry Mwanga Nkumbula\n3. Munkolo\n5. _Other(please specify)_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kanyama\n2. Harry Mwanga Nkumbula\n3. Munkolo\n5. _Other(please specify)_";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kanyama\n2. Harry Mwanga Nkumbula\n3. Munkolo\n5. _Other(please specify)_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kanyama\n2. Harry Mwanga Nkumbula\n3. Munkolo\n5. _Other(please specify)_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kanyama\n2. Harry Mwanga Nkumbula\n3. Munkolo\n5. _Other(please specify)_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Kanyama\n2. Harry Mwanga Nkumbula\n3. Munkolo\n5. _Other(please specify)_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 3,
+                                "step_no" => 3
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }elseif ($user_message == "4" || $user_message == 4){
+                            //Lusaka Central
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "5",
+                                "question" => "Which constituency do you live in?",
+                                "answer" => "4",
+                                "answer_value" => "Lusaka Central",
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Silwizya\n2. Independence\n3. Lubwa\n5. Kabulonga \n6. _Other(please specify)_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Silwizya\n2. Independence\n3. Lubwa\n5. Kabulonga \n6. _Other(please specify)_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Silwizya\n2. Independence\n3. Lubwa\n5. Kabulonga \n6. _Other(please specify)_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Silwizya\n2. Independence\n3. Lubwa\n5. Kabulonga \n6. _Other(please specify)_";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Silwizya\n2. Independence\n3. Lubwa\n5. Kabulonga \n6. _Other(please specify)_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Silwizya\n2. Independence\n3. Lubwa\n5. Kabulonga \n6. _Other(please specify)_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Silwizya\n2. Independence\n3. Lubwa\n5. Kabulonga \n6. _Other(please specify)_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Silwizya\n2. Independence\n3. Lubwa\n5. Kabulonga \n6. _Other(please specify)_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 3,
+                                "step_no" => 4
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }elseif ($user_message == "5" || $user_message == 5){
+                            //Mandevu
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "5",
+                                "question" => "In which Constituency do you stay in?",
+                                "answer" => "5",
+                                "answer_value" => "Mandevu",
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 3,
+                                "step_no" => 5
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }elseif ($user_message == "6" || $user_message == 6){
+                            //Matero
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "5",
+                                "question" => "In which Constituency do you stay in?",
+                                "answer" => "6",
+                                "answer_value" => "Matero",
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 3,
+                                "step_no" => 6
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }elseif ($user_message == "7" || $user_message == 7){
+                            //Munali
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "5",
+                                "question" => "In which Constituency do you stay in?",
+                                "answer" => "7",
+                                "answer_value" => "Munali",
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*In which Ward do you stay in?* \n1. Roma\n2. Mulungushi\n3. Ngwerere\n4. Chaisa\n5. Justine Kabwe\n6. Raphael Chota\n7. Mpulungu \n8. _Other(please specify)_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 3,
+                                "step_no" => 7
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }else{
+                            $error_message_string = "";
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
+                            } elseif ($language == 5) //lozi
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                                $error_message_string = "❌ You have selected an invalid option. \n";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 2,
+                                "step_no" => 4
+                            ]);
+
+                            $send_error_message = $this->sendMessage($error_message_string, $phone_number, $from);
+                            return $this->sendMessage($message_string, $phone_number, $from);
                         }
                     }
                     break;
+                case '3':
+                    if($case_no == 3 && $step_no == 1 && !empty($user_message)){
+                        //chosen Kabwata Ward
+                        $chosen_ward = $user_message;
+
+                        if($user_message == "1" || $user_message == 1){
+                            $chosen_ward = "Kamwala";
+                        }elseif ($user_message == "2" || $user_message == 2){
+                            $chosen_ward = "Kabwata";
+                        }elseif ($user_message == "3" || $user_message == 3){
+                            $chosen_ward = "Libala";
+                        }elseif ($user_message == "4" || $user_message == 4){
+                            $chosen_ward = "Chilenje";
+                        }elseif ($user_message == "5" || $user_message == 5){
+                            $chosen_ward = "Kamulanga";
+                        }
+
+                        //save the selected ward
+                        $save_data = DataSurvey::create([
+                            "session_id" => $session_id,
+                            "phone_number" => $from,
+                            "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                            "channel" => "WhatsApp",
+                            "question_number" => "6",
+                            "question" => "In which Ward do you stay in?",
+                            "answer" => "1",
+                            "answer_value" => $chosen_ward,
+                            "telecom_operator" => $telecom_operator,
+                            "data_category" => $data_category
+                        ]);
+
+                        $save_data->save();
+
+                        if ($language == 1) //english
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 2) //nyanja
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 3) //bemba
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 4) //tonga
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 5) //lozi
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 6) //lunda
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 7) //luvale
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 8) //kaonde
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        }
+
+                        $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                            "case_no" => 4,
+                            "step_no" => 1
+                        ]);
+
+                        return $this->sendMessage($message_string, $phone_number, $from);
+
+
+                    }elseif($case_no == 3 && $step_no == 2 && !empty($user_message)){
+                        //
+                        $chosen_ward = $user_message;
+
+                        if($user_message == "1" || $user_message == 1){
+                            $chosen_ward = "Nkoloma";
+                        }elseif ($user_message == "2" || $user_message == 2){
+                            $chosen_ward = "Chawama";
+                        }elseif ($user_message == "3" || $user_message == 3){
+                            $chosen_ward = "John Howard";
+                        }elseif ($user_message == "4" || $user_message == 4){
+                            $chosen_ward = "Lilayi";
+                        }
+
+                        //save the selected ward
+                        $save_data = DataSurvey::create([
+                            "session_id" => $session_id,
+                            "phone_number" => $from,
+                            "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                            "channel" => "WhatsApp",
+                            "question_number" => "6",
+                            "question" => "In which Ward do you stay in?",
+                            "answer" => "1",
+                            "answer_value" => $chosen_ward,
+                            "telecom_operator" => $telecom_operator,
+                            "data_category" => $data_category
+                        ]);
+
+                        $save_data->save();
+
+                        if ($language == 1) //english
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 2) //nyanja
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 3) //bemba
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 4) //tonga
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 5) //lozi
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 6) //lunda
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 7) //luvale
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        } elseif ($language == 8) //kaonde
+                        {
+                            $message_string = "*Have you received a COVID 19 Vaccine?* \n1. Yes\n2. No";
+                        }
+
+                        $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                            "case_no" => 4,
+                            "step_no" => 1
+                        ]);
+
+                        return $this->sendMessage($message_string, $phone_number, $from);
+                    }else{
+                        $error_message_string = "";
+
+                        if ($language == 1) //english
+                        {
+                            $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
+                            $error_message_string = "❌ You have selected an invalid option. \n";
+                        } elseif ($language == 2) //nyanja
+                        {
+                            $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            $error_message_string = "❌ You have selected an invalid option. \n";
+                        } elseif ($language == 3) //bemba
+                        {
+                            $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            $error_message_string = "❌ You have selected an invalid option. \n";
+                        } elseif ($language == 4) //tonga
+                        {
+                            $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            $error_message_string = "❌ You have selected an invalid option. \n";
+                        } elseif ($language == 5) //lozi
+                        {
+                            $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            $error_message_string = "❌ You have selected an invalid option. \n";
+                        } elseif ($language == 6) //lunda
+                        {
+                            $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            $error_message_string = "❌ You have selected an invalid option. \n";
+                        } elseif ($language == 7) //luvale
+                        {
+                            $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            $error_message_string = "❌ You have selected an invalid option. \n";
+                        } elseif ($language == 8) //kaonde
+                        {
+                            $message_string = "*Which constituency do you live in?* \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
+                            $error_message_string = "❌ You have selected an invalid option. \n";
+                        }
+
+                        $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                            "case_no" => 2,
+                            "step_no" => 4
+                        ]);
+
+                        $send_error_message = $this->sendMessage($error_message_string, $phone_number, $from);
+                        return $this->sendMessage($message_string, $phone_number, $from);
+
+                    }
+                    break;
+                case '4': //
+                    if($case_no == 4 && $step_no == 1 && !empty($user_message))
+                    {
+
+                    }
             }
         } else {
             Log::info('WhatsApp Error', ['no message' => json_encode($request)]);
