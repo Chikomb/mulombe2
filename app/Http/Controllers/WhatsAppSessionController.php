@@ -556,7 +556,7 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 3
                             ]);
 
-                            $send_error_message = $this->sendImageMessage($error_message_string, $phone_number, $from);
+                            $send_error_message = $this->sendMessage($error_message_string, $phone_number, $from);
                             return $this->sendMessage($message_string, $phone_number, $from);
                         }
 
