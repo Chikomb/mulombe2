@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\ClearLogs' => $baseDir . '/app/Console/Commands/ClearLogs.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\APIController' => $baseDir . '/app/Http/Controllers/APIController.php',
@@ -22,6 +23,7 @@ return array(
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\DataCategoryController' => $baseDir . '/app/Http/Controllers/DataCategoryController.php',
     'App\\Http\\Controllers\\DataSurveyController' => $baseDir . '/app/Http/Controllers/DataSurveyController.php',
+    'App\\Http\\Controllers\\LanguageController' => $baseDir . '/app/Http/Controllers/LanguageController.php',
     'App\\Http\\Controllers\\PermisssionController' => $baseDir . '/app/Http/Controllers/PermisssionController.php',
     'App\\Http\\Controllers\\ProgressController' => $baseDir . '/app/Http/Controllers/ProgressController.php',
     'App\\Http\\Controllers\\QuestionStructureController' => $baseDir . '/app/Http/Controllers/QuestionStructureController.php',
@@ -185,13 +187,13 @@ return array(
     'Database\\Seeders\\DataCategorySeeder' => $baseDir . '/database/seeders/DataCategorySeeder.php',
     'Database\\Seeders\\DataSurveySeeder' => $baseDir . '/database/seeders/DataSurveySeeder.php',
     'Database\\Seeders\\DatabaseSeeder' => $baseDir . '/database/seeders/DatabaseSeeder.php',
+    'Database\\Seeders\\LanguageSeeder' => $baseDir . '/database/seeders/LanguageSeeder.php',
     'Database\\Seeders\\PermisssionSeeder' => $baseDir . '/database/seeders/PermisssionSeeder.php',
     'Database\\Seeders\\ProgressSeeder' => $baseDir . '/database/seeders/ProgressSeeder.php',
     'Database\\Seeders\\QuestionStructureSeeder' => $baseDir . '/database/seeders/QuestionStructureSeeder.php',
     'Database\\Seeders\\RoleSeeder' => $baseDir . '/database/seeders/RoleSeeder.php',
     'Database\\Seeders\\SmsSessionSeeder' => $baseDir . '/database/seeders/SmsSessionSeeder.php',
     'Database\\Seeders\\TotalQuestionSeeder' => $baseDir . '/database/seeders/TotalQuestionSeeder.php',
-    'Database\\Seeders\\TotalQuestionsSeeder' => $baseDir . '/database/seeders/TotalQuestionsSeeder.php',
     'Database\\Seeders\\UssdSessionSeeder' => $baseDir . '/database/seeders/UssdSessionSeeder.php',
     'Database\\Seeders\\WebhookSeeder' => $baseDir . '/database/seeders/WebhookSeeder.php',
     'Database\\Seeders\\WhatsAppSessionSeeder' => $baseDir . '/database/seeders/WhatsAppSessionSeeder.php',

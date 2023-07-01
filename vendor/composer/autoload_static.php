@@ -544,6 +544,7 @@ class ComposerStaticInit8886d9df5d02771bad49096ee8e13944
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\ClearLogs' => __DIR__ . '/../..' . '/app/Console/Commands/ClearLogs.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\APIController' => __DIR__ . '/../..' . '/app/Http/Controllers/APIController.php',
@@ -560,6 +561,7 @@ class ComposerStaticInit8886d9df5d02771bad49096ee8e13944
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DataCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataCategoryController.php',
         'App\\Http\\Controllers\\DataSurveyController' => __DIR__ . '/../..' . '/app/Http/Controllers/DataSurveyController.php',
+        'App\\Http\\Controllers\\LanguageController' => __DIR__ . '/../..' . '/app/Http/Controllers/LanguageController.php',
         'App\\Http\\Controllers\\PermisssionController' => __DIR__ . '/../..' . '/app/Http/Controllers/PermisssionController.php',
         'App\\Http\\Controllers\\ProgressController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProgressController.php',
         'App\\Http\\Controllers\\QuestionStructureController' => __DIR__ . '/../..' . '/app/Http/Controllers/QuestionStructureController.php',
@@ -723,13 +725,13 @@ class ComposerStaticInit8886d9df5d02771bad49096ee8e13944
         'Database\\Seeders\\DataCategorySeeder' => __DIR__ . '/../..' . '/database/seeders/DataCategorySeeder.php',
         'Database\\Seeders\\DataSurveySeeder' => __DIR__ . '/../..' . '/database/seeders/DataSurveySeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
+        'Database\\Seeders\\LanguageSeeder' => __DIR__ . '/../..' . '/database/seeders/LanguageSeeder.php',
         'Database\\Seeders\\PermisssionSeeder' => __DIR__ . '/../..' . '/database/seeders/PermisssionSeeder.php',
         'Database\\Seeders\\ProgressSeeder' => __DIR__ . '/../..' . '/database/seeders/ProgressSeeder.php',
         'Database\\Seeders\\QuestionStructureSeeder' => __DIR__ . '/../..' . '/database/seeders/QuestionStructureSeeder.php',
         'Database\\Seeders\\RoleSeeder' => __DIR__ . '/../..' . '/database/seeders/RoleSeeder.php',
         'Database\\Seeders\\SmsSessionSeeder' => __DIR__ . '/../..' . '/database/seeders/SmsSessionSeeder.php',
         'Database\\Seeders\\TotalQuestionSeeder' => __DIR__ . '/../..' . '/database/seeders/TotalQuestionSeeder.php',
-        'Database\\Seeders\\TotalQuestionsSeeder' => __DIR__ . '/../..' . '/database/seeders/TotalQuestionsSeeder.php',
         'Database\\Seeders\\UssdSessionSeeder' => __DIR__ . '/../..' . '/database/seeders/UssdSessionSeeder.php',
         'Database\\Seeders\\WebhookSeeder' => __DIR__ . '/../..' . '/database/seeders/WebhookSeeder.php',
         'Database\\Seeders\\WhatsAppSessionSeeder' => __DIR__ . '/../..' . '/database/seeders/WhatsAppSessionSeeder.php',
