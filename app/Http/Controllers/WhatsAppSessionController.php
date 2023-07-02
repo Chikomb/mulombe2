@@ -133,9 +133,9 @@ class WhatsAppSessionController extends Controller
                             "step_no" => 1
                         ]);
 
-                        $this->sendImageMessage($phone_number, $from, $imageURL);
+                        return $this->sendImageMessage($message_string,$phone_number, $from, $imageURL);
 
-                        return $this->sendMessage($message_string, $phone_number, $from);
+                        //return $this->sendMessage($message_string, $phone_number, $from);
 
                     } elseif ($case_no == 1 && $step_no == 1 && !empty($user_message)) {
 
@@ -3669,7 +3669,7 @@ class WhatsAppSessionController extends Controller
         return response('success', 200);
     }
 
-    function sendImageMessage($phone_number, $send_to, $imageURL)
+    function sendImageMessage($message_string, $phone_number, $send_to, $imageURL)
     {
         $token = env('WHATSAPP_TOKEN');
 
@@ -3679,7 +3679,7 @@ class WhatsAppSessionController extends Controller
             'messaging_product' => 'whatsapp',
             'to' => $send_to,
             'type' => 'image',
-            'image' => ['link' => $imageURL],
+            'image' => ['link' => $imageURL, 'caption' => $message_string],
         ]);
 
         $responseBody = $send_image_message->body();
