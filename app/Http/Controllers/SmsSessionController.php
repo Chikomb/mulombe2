@@ -160,7 +160,7 @@ class SmsSessionController extends Controller
                             $selected_language = $this->sendMessage($ticked_language, $phone_number, $phone_number);
                             return $this->sendMessage($message_string, $phone_number);
                         } else {
-                            $error_message_string = "You have entered an invalid input!_";
+                            $error_message_string = "You have entered an invalid input!";
 
                             $geLanguages = Language::where('is_active', 1)->get();
 
@@ -288,31 +288,31 @@ class SmsSessionController extends Controller
                                 if ($language == 1) //english
                                 {
                                     $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 2) //nyanja
                                 {
                                     $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 3) //bemba
                                 {
                                     $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 4) //tonga
                                 {
                                     $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 5) //Kaonde
                                 {
                                     $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 6) //lunda
                                 {
                                     $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 7) //luvale
                                 {
                                     $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 }
 
                                 $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -328,31 +328,31 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?. \n\n1. Yes \n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -422,35 +422,35 @@ class SmsSessionController extends Controller
                                 if ($language == 1) //english
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above. Thank you.";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 2) //nyanja
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 3) //bemba
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 4) //tonga
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 5) //Kaonde
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 6) //lunda
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 7) //luvale
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 8) //kaonde
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 }
 
                                 $save_data = DataSurvey::create([
@@ -482,35 +482,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "What is your age? (Enter in years)";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "What is your age? (Enter in years)";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "What is your age? (Enter in years)";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "What is your age? (Enter in years)";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Munani lilimo zekai (mun’ole lilimo) \n\n";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "What is your age? (Enter in years)";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "What is your age? (Enter in years)";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "What is your age? (Enter in years)";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -589,35 +589,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -788,35 +788,35 @@ class SmsSessionController extends Controller
                                 if ($language == 1) //english
                                 {
                                     $message_string = "In which District do you live? \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 2) //nyanja
                                 {
                                     $message_string = "In which District do you live? \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 3) //bemba
                                 {
                                     $message_string = "In which District do you live? \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 4) //tonga
                                 {
                                     $message_string = "In which District do you live? \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 5) //Kaonde
                                 {
                                     $message_string = "In which District do you live? \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 6) //lunda
                                 {
                                     $message_string = "In which District do you live? \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 7) //luvale
                                 {
                                     $message_string = "In which District do you live? \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 } elseif ($language == 8) //kaonde
                                 {
                                     $message_string = "In which District do you live? \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-                                    $error_message_string = "You have entered an invalid input!_";
+                                    $error_message_string = "You have entered an invalid input!";
                                 }
 
                                 $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -831,35 +831,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "What is your gender? \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -1228,40 +1228,40 @@ class SmsSessionController extends Controller
 
                             }
                         } else {
-                            $error_message_string = "You have entered an invalid input!_";
+                            $error_message_string = "You have entered an invalid input!";
 
                             if ($language == 1) //english
                             {
                                 $message_string = "Which constituency do you live in? \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Which constituency do you live in? \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Which constituency do you live in? \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Which constituency do you live in? \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Which constituency do you live in? \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Which constituency do you live in? \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Which constituency do you live in? \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Which constituency do you live in? \n1. Chawama \n2. Kabwata \n3. Kanyama \n4. Lusaka Central \n5. Mandevu \n6. Matero \n7. Munali";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -1965,35 +1965,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chainda\n2. Mtendere\n3. Kalingalinga\n4. Chakunkula\n5. Munali\n6. Chelstone\n7. Avondale ";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chainda\n2. Mtendere\n3. Kalingalinga\n4. Chakunkula\n5. Munali\n6. Chelstone\n7. Avondale ";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chainda\n2. Mtendere\n3. Kalingalinga\n4. Chakunkula\n5. Munali\n6. Chelstone\n7. Avondale ";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chainda\n2. Mtendere\n3. Kalingalinga\n4. Chakunkula\n5. Munali\n6. Chelstone\n7. Avondale ";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chainda\n2. Mtendere\n3. Kalingalinga\n4. Chakunkula\n5. Munali\n6. Chelstone\n7. Avondale ";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chainda\n2. Mtendere\n3. Kalingalinga\n4. Chakunkula\n5. Munali\n6. Chelstone\n7. Avondale ";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chainda\n2. Mtendere\n3. Kalingalinga\n4. Chakunkula\n5. Munali\n6. Chelstone\n7. Avondale ";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chainda\n2. Mtendere\n3. Kalingalinga\n4. Chakunkula\n5. Munali\n6. Chelstone\n7. Avondale ";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -2124,35 +2124,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Dundumwezi \n2. Kalomo Central";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Dundumwezi \n2. Kalomo Central";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Dundumwezi \n2. Kalomo Central";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Dundumwezi \n2. Kalomo Central";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Dundumwezi \n2. Kalomo Central";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Dundumwezi \n2. Kalomo Central";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Dundumwezi \n2. Kalomo Central";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Dundumwezi \n2. Kalomo Central";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -2240,35 +2240,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chikanta\n2. Chamuka\n3. Kasukwe\n4. Omba\n5. Bbili\n6. Naluja";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chikanta\n2. Chamuka\n3. Kasukwe\n4. Omba\n5. Bbili\n6. Naluja";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chikanta\n2. Chamuka\n3. Kasukwe\n4. Omba\n5. Bbili\n6. Naluja";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chikanta\n2. Chamuka\n3. Kasukwe\n4. Omba\n5. Bbili\n6. Naluja";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chikanta\n2. Chamuka\n3. Kasukwe\n4. Omba\n5. Bbili\n6. Naluja";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chikanta\n2. Chamuka\n3. Kasukwe\n4. Omba\n5. Bbili\n6. Naluja";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chikanta\n2. Chamuka\n3. Kasukwe\n4. Omba\n5. Bbili\n6. Naluja";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chikanta\n2. Chamuka\n3. Kasukwe\n4. Omba\n5. Bbili\n6. Naluja";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -2365,35 +2365,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Siachitema\n2. Kalonda\n3. Choonga\n4. Mayoba\n5. Namwianga\n6. Simayakwe\n7. Chawila\n8. Sipatunyana\n9. Nachikungu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Siachitema\n2. Kalonda\n3. Choonga\n4. Mayoba\n5. Namwianga\n6. Simayakwe\n7. Chawila\n8. Sipatunyana\n9. Nachikungu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Siachitema\n2. Kalonda\n3. Choonga\n4. Mayoba\n5. Namwianga\n6. Simayakwe\n7. Chawila\n8. Sipatunyana\n9. Nachikungu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Siachitema\n2. Kalonda\n3. Choonga\n4. Mayoba\n5. Namwianga\n6. Simayakwe\n7. Chawila\n8. Sipatunyana\n9. Nachikungu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Siachitema\n2. Kalonda\n3. Choonga\n4. Mayoba\n5. Namwianga\n6. Simayakwe\n7. Chawila\n8. Sipatunyana\n9. Nachikungu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Siachitema\n2. Kalonda\n3. Choonga\n4. Mayoba\n5. Namwianga\n6. Simayakwe\n7. Chawila\n8. Sipatunyana\n9. Nachikungu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Siachitema\n2. Kalonda\n3. Choonga\n4. Mayoba\n5. Namwianga\n6. Simayakwe\n7. Chawila\n8. Sipatunyana\n9. Nachikungu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Siachitema\n2. Kalonda\n3. Choonga\n4. Mayoba\n5. Namwianga\n6. Simayakwe\n7. Chawila\n8. Sipatunyana\n9. Nachikungu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -2465,35 +2465,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Chavuma";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Chavuma";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Chavuma";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Chavuma";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Chavuma";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Chavuma";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Chavuma";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Which constituency do you live in? \n\n1. Chavuma";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -2602,35 +2602,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chambi Mandalo\n2. Sewe\n3. Lingelengenda\n4. Chiyeke\n5. KalomboKamisamba\n6. Chivombo Mbelango\n7. Chavuma central\n8. Sanjongo\n9. Lingundu\n10. Lukolwe Musumba\n11. Kambuya Mukelengombe\n12. Nyalanda Nyambingala\n13. Nguvu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chambi Mandalo\n2. Sewe\n3. Lingelengenda\n4. Chiyeke\n5. KalomboKamisamba\n6. Chivombo Mbelango\n7. Chavuma central\n8. Sanjongo\n9. Lingundu\n10. Lukolwe Musumba\n11. Kambuya Mukelengombe\n12. Nyalanda Nyambingala\n13. Nguvu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chambi Mandalo\n2. Sewe\n3. Lingelengenda\n4. Chiyeke\n5. KalomboKamisamba\n6. Chivombo Mbelango\n7. Chavuma central\n8. Sanjongo\n9. Lingundu\n10. Lukolwe Musumba\n11. Kambuya Mukelengombe\n12. Nyalanda Nyambingala\n13. Nguvu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chambi Mandalo\n2. Sewe\n3. Lingelengenda\n4. Chiyeke\n5. KalomboKamisamba\n6. Chivombo Mbelango\n7. Chavuma central\n8. Sanjongo\n9. Lingundu\n10. Lukolwe Musumba\n11. Kambuya Mukelengombe\n12. Nyalanda Nyambingala\n13. Nguvu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chambi Mandalo\n2. Sewe\n3. Lingelengenda\n4. Chiyeke\n5. KalomboKamisamba\n6. Chivombo Mbelango\n7. Chavuma central\n8. Sanjongo\n9. Lingundu\n10. Lukolwe Musumba\n11. Kambuya Mukelengombe\n12. Nyalanda Nyambingala\n13. Nguvu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chambi Mandalo\n2. Sewe\n3. Lingelengenda\n4. Chiyeke\n5. KalomboKamisamba\n6. Chivombo Mbelango\n7. Chavuma central\n8. Sanjongo\n9. Lingundu\n10. Lukolwe Musumba\n11. Kambuya Mukelengombe\n12. Nyalanda Nyambingala\n13. Nguvu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chambi Mandalo\n2. Sewe\n3. Lingelengenda\n4. Chiyeke\n5. KalomboKamisamba\n6. Chivombo Mbelango\n7. Chavuma central\n8. Sanjongo\n9. Lingundu\n10. Lukolwe Musumba\n11. Kambuya Mukelengombe\n12. Nyalanda Nyambingala\n13. Nguvu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "In which Ward do you stay in? \n1. Chambi Mandalo\n2. Sewe\n3. Lingelengenda\n4. Chiyeke\n5. KalomboKamisamba\n6. Chivombo Mbelango\n7. Chavuma central\n8. Sanjongo\n9. Lingundu\n10. Lukolwe Musumba\n11. Kambuya Mukelengombe\n12. Nyalanda Nyambingala\n13. Nguvu";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -2754,35 +2754,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "Have you received a COVID-19 vaccine?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Have you received a COVID-19 vaccine?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Have you received a COVID-19 vaccine?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Have you received a COVID-19 vaccine?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Have you received a COVID-19 vaccine?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Have you received a COVID-19 vaccine?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Have you received a COVID-19 vaccine?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Have you received a COVID-19 vaccine?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -2868,35 +2868,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "How concerned are you about getting COVID-19?\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "How concerned are you about getting COVID-19?\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "How concerned are you about getting COVID-19?\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "How concerned are you about getting COVID-19?\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "How concerned are you about getting COVID-19?\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "How concerned are you about getting COVID-19?\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "How concerned are you about getting COVID-19?\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "How concerned are you about getting COVID-19?\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -2972,34 +2972,34 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "Do you want to get a COVID-19 vaccine?\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Do you want to get a COVID-19 vaccine?\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Do you want to get a COVID-19 vaccine?\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Do you want to get a COVID-19 vaccine?\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Do you want to get a COVID-19 vaccine?\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Do you want to get a COVID-19 vaccine?\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Do you want to get a COVID-19 vaccine?\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Do you want to get a COVID-19 vaccine?\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -3082,35 +3082,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "How important is getting a COVID-19 vaccine for your health?\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "How important is getting a COVID-19 vaccine for your health?\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "How important is getting a COVID-19 vaccine for your health?\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "How important is getting a COVID-19 vaccine for your health?\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "How important is getting a COVID-19 vaccine for your health?\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "How important is getting a COVID-19 vaccine for your health?\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "How important is getting a COVID-19 vaccine for your health?\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "How important is getting a COVID-19 vaccine for your health?\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -3192,35 +3192,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "Have most of your close family and friends received the COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Have most of your close family and friends received the COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Have most of your close family and friends received the COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Have most of your close family and friends received the COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Have most of your close family and friends received the COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Have most of your close family and friends received the COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Have most of your close family and friends received the COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Have most of your close family and friends received the COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -3302,35 +3302,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "Do you think most of your close family and friends want you to get a COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Do you think most of your close family and friends want you to get a COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Do you think most of your close family and friends want you to get a COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Do you think most of your close family and friends want you to get a COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Do you think most of your close family and friends want you to get a COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Do you think most of your close family and friends want you to get a COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Do you think most of your close family and friends want you to get a COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Do you think most of your close family and friends want you to get a COVID-19 vaccine?\n\n1. Yes\n2. No\n3. I don’t know";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -3410,35 +3410,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "Do you know where to get a COVID-19 vaccine for yourself?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Do you know where to get a COVID-19 vaccine for yourself?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Do you know where to get a COVID-19 vaccine for yourself?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Do you know where to get a COVID-19 vaccine for yourself?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Do you know where to get a COVID-19 vaccine for yourself?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Do you know where to get a COVID-19 vaccine for yourself?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Do you know where to get a COVID-19 vaccine for yourself?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Do you know where to get a COVID-19 vaccine for yourself?\n\n1. Yes\n2. No";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -3523,35 +3523,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
                             $update_session = SmsSession::where('session_id', $session_id)->update([
@@ -3636,35 +3636,35 @@ class SmsSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "Do you want to get a COVID-19 booster vaccine?\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "Do you want to get a COVID-19 booster vaccine?\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "Do you want to get a COVID-19 booster vaccine?\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "Do you want to get a COVID-19 booster vaccine?\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Do you want to get a COVID-19 booster vaccine?\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "Do you want to get a COVID-19 booster vaccine?\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "Do you want to get a COVID-19 booster vaccine?\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "Do you want to get a COVID-19 booster vaccine?\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
-                                $error_message_string = "You have entered an invalid input!_";
+                                $error_message_string = "You have entered an invalid input!";
                             }
 
 
