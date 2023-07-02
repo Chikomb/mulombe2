@@ -139,7 +139,7 @@ class WhatsAppSessionController extends Controller
 
                     } elseif ($case_no == 1 && $step_no == 1 && !empty($user_message)) {
 
-                        if (is_numeric($user_message)) {
+                        if (is_numeric($user_message) && $user_message >= 1 && $user_message <= 7) {
                             $chosen_language = "English";
 
                             if ($language == 1) //english
