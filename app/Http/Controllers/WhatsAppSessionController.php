@@ -192,7 +192,7 @@ class WhatsAppSessionController extends Controller
 
                             $geLanguages = Language::where('is_active', 1)->get();
 
-                            $language_menu = "*Akros and Ministry of health are conducting a survey. Choose language*\n";
+                            $language_menu = "*MOH & Akros are conducting a survey. Choose language*\n\n";
 
                             $lists = $geLanguages;
                             $counter = 1;

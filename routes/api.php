@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('/token', [App\Http\Controllers\ApiuserController::class,'authenticate_user']);
 Route::get('/whatsapp', [App\Http\Controllers\WhatsAppSessionController::class,'WhatsApp_Verify']);
 Route::post('/whatsapp', [App\Http\Controllers\WhatsAppSessionController::class,'WhatsApp_Bot']);
+Route::post('/sms',[App\Http\Controllers\SmsSessionController::class,'Sms_Bot']);
 
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/surveys',[App\Http\Controllers\APIController::class,'all_surveys']);
