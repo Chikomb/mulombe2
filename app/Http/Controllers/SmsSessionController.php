@@ -9,6 +9,7 @@ use App\Models\SmsSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Config;
 
 class SmsSessionController extends Controller
 {
@@ -3688,12 +3689,14 @@ class SmsSessionController extends Controller
 
     function sendMessage($message_string, $phone_number)
     {
+        $sender_number = env('SMS_SENDER_NUMBER');
+
         //Next auto response
         $url_encoded_message = urlencode($message_string);
 
         //Next auto response
         $sendSenderSMS = Http::withoutVerifying()
-            ->post('http://www.cloudservicezm.com/smsservice/httpapi?username=Blessmore&password=Blessmore&msg=' . $url_encoded_message . '.+&shortcode=2343&sender_id=0979669350&phone=' . $phone_number . '&api_key=121231313213123123');
+            ->post('http://www.cloudservicezm.com/smsservice/httpapi?username=Blessmore&password=Blessmore&msg=' . $url_encoded_message . '.+&shortcode=2343&sender_id='.$sender_number.'&phone=' . $phone_number . '&api_key=121231313213123123');
 
         return $sendSenderSMS->body();
     }
