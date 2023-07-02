@@ -77,6 +77,14 @@ class WhatsAppSessionController extends Controller
                 $telecom_operator = "Airtel";
             }
 
+            /*if(WhatsAppSession::where('phone_number', $from)->where('status', 1)->count() > 0)
+            {
+                $case_no = 14;
+                $step_no = 1;
+            }else{
+
+            }*/
+
             //getting last session info
             $getLastSessionInfor = WhatsAppSession::where('phone_number', $from)->where('status', 0)->orderBy('id', 'DESC')->first();
 
@@ -180,6 +188,8 @@ class WhatsAppSessionController extends Controller
                             $selected_language = $this->sendMessage($ticked_language, $phone_number, $from);
                             return $this->sendMessage($message_string, $phone_number, $from);
                         } else {
+                            $error_message_string = "⚠️ _You have entered an invalid input!_";
+
                             $geLanguages = Language::where('is_active', 1)->get();
 
                             $language_menu = "*Akros and Ministry of health are conducting a survey. Choose language*\n";
@@ -200,12 +210,13 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 1
                             ]);
 
+                            $error_response = $this->sendMessage($error_message_string, $phone_number, $from);
                             return $this->sendMessage($message_string, $phone_number, $from);
                         }
 
                     } elseif ($case_no == 1 && $step_no == 2 && !empty($user_message)) {
-                        if (is_numeric($user_message)) {
-                            if ($user_message == "1" || $user_message == 1)// register account
+                        if (is_numeric($user_message) && $user_message >= 1 && $user_message <= 2) {
+                            if ($user_message == 1)// register account
                             {
                                 $save_data = DataSurvey::create([
                                     "session_id" => $session_id,
@@ -252,7 +263,7 @@ class WhatsAppSessionController extends Controller
 
                                 return $this->sendMessage($message_string, $phone_number, $from);
 
-                            } elseif ($user_message == "2" || $user_message == 2) //Learn More
+                            } elseif ($user_message == 2) //Learn More
                             {
 
                                 if ($language == 1) //english
@@ -305,24 +316,31 @@ class WhatsAppSessionController extends Controller
                                 if ($language == 1) //english
                                 {
                                     $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 2) //nyanja
                                 {
                                     $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 3) //bemba
                                 {
                                     $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 4) //tonga
                                 {
                                     $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 5) //Kaonde
                                 {
                                     $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 6) //lunda
                                 {
                                     $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 7) //luvale
                                 {
                                     $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 }
 
                                 $update_session = WhatsAppSession::where('session_id', $session_id)->update([
@@ -330,31 +348,39 @@ class WhatsAppSessionController extends Controller
                                     "step_no" => 1
                                 ]);
 
+                                $error_response = $this->sendMessage($error_message_string, $phone_number, $from);
                                 return $this->sendMessage($message_string, $phone_number, $from);
 
                             }
                         } else {
                             if ($language == 1) //english
                             {
-                                $message_string = "*AKROS and Ministry of health are conducting a survey. If you are 18 years or older and wish to proceed?.* \n\n1. Yes \n2. No";
+                                $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 2) //nyanja
                             {
-                                $message_string = "*AKROS ndi Unduna wa Zaumoyo akuchita kafukufuku. Ngati muli ndi zaka khumi ndi zisanu ndi zitatu kapena kuposerapo ndipo mukufuna kupitiriza?.* \n\n1. Inde \n2. Ayi";
+                                $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 3) //bemba
                             {
-                                $message_string = "*AKROS na Ministry of Health balifye uma ukulandafye umutende. Ngabakwata umwaka umo na fwela, nafimbi ukupeza ifikolwe?* \n\n1. Endita mukwai \n2. Iyo mukwai";
+                                $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 4) //tonga
                             {
-                                $message_string = "*Ai AKROS na Ministry of Health 'a kufutisa insala. Bula kuukata tinebo kumalukula 18 uku mukufyala kukukolokoti?* \n\n1. Ee \n2. Awe";
+                                $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 5) //Kaonde
                             {
-                                $message_string = "*Akros niba liluko la makete (Ministry of Health) basweli kueza patisiso kuamana nibutata bobutisizwe ki butuku bwa Covid 19 kwa sicaba mwa naha Zambia. Haiba munani ni lilimo ze 18 kuya fahalimu mi mubata kuzwela pili,* \n\n1. Eni \n2. Batili";
+                                $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 6) //lunda
                             {
-                                $message_string = "*AKROS na Ministry ya Musokolwa ishasha utusokolwa. Nkashi lwandi watau masumu ya mundu kumweni kumukasanga?* \n\n1. Ehe \n2. Hae";
+                                $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 7) //luvale
                             {
-                                $message_string = "*AKROS na Mutundu wa Mbeu aveba shingwana shikongomelo. Uta landa vata ka mavilu kumabili na mwikaji, elacitandale?* \n\n1. Eyo \n2. Teya";
+                                $message_string = "*This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?.* \n\n1. Yes \n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             }
 
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
@@ -362,6 +388,7 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 1
                             ]);
 
+                            $error_response = $this->sendMessage($error_message_string, $phone_number, $from);
                             return $this->sendMessage($message_string, $phone_number, $from);
                         }
                     }
@@ -422,28 +449,36 @@ class WhatsAppSessionController extends Controller
                                 //if entered age is less than 18 years old
                                 if ($language == 1) //english
                                 {
-                                    $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                                    $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above. Thank you.";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 2) //nyanja
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 3) //bemba
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 4) //tonga
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 5) //Kaonde
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 6) //lunda
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 7) //luvale
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 8) //kaonde
                                 {
                                     $message_string = "Kindly note that this survey is only limited to individuals from the age of 18 years old and above";
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 }
 
                                 $save_data = DataSurvey::create([
@@ -467,6 +502,7 @@ class WhatsAppSessionController extends Controller
                                     "status" => 1 //terminate session
                                 ]);
 
+                                $error_response = $this->sendMessage($error_message_string, $phone_number, $from);
                                 return $this->sendMessage($message_string, $phone_number, $from);
 
                             }
@@ -474,27 +510,35 @@ class WhatsAppSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "What is your age? (Enter in years)";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "What is your age? (Enter in years)";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "What is your age? (Enter in years)";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "What is your age? (Enter in years)";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "Munani lilimo zekai (mun’ole lilimo) \n\n";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "What is your age? (Enter in years)";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "What is your age? (Enter in years)";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "What is your age? (Enter in years)";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             }
 
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
@@ -502,12 +546,13 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 1
                             ]);
 
+                            $error_response = $this->sendMessage($error_message_string, $phone_number, $from);
                             return $this->sendMessage($message_string, $phone_number, $from);
 
                         }
 
                     } elseif ($case_no == 2 && $step_no == 2 && !empty($user_message)) {
-                        if (is_numeric($user_message)) {
+                        if (is_numeric($user_message) && $user_message >= 1 && $user_message <= 4) {
 
                             $gender = "invalid input";
 
@@ -572,27 +617,35 @@ class WhatsAppSessionController extends Controller
                             if ($language == 1) //english
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             }
 
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
@@ -600,12 +653,13 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 2
                             ]);
 
+                            $error_response = $this->sendMessage($error_message_string, $phone_number, $from);
                             return $this->sendMessage($message_string, $phone_number, $from);
                         }
 
                     } elseif ($case_no == 2 && $step_no == 3 && !empty($user_message)) {
                         //Save selected District and Ask for respective constituency
-                        if (is_numeric($user_message)) {
+                        if (is_numeric($user_message) && $user_message >= 1 && $user_message <= 3) {
                             if ($user_message == 1) {
                                 //save the Lusaka district
                                 $save_data = DataSurvey::create([
@@ -762,35 +816,35 @@ class WhatsAppSessionController extends Controller
                                 if ($language == 1) //english
                                 {
                                     $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 2) //nyanja
                                 {
                                     $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 3) //bemba
                                 {
                                     $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 4) //tonga
                                 {
                                     $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 5) //Kaonde
                                 {
                                     $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 6) //lunda
                                 {
                                     $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 7) //luvale
                                 {
                                     $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 } elseif ($language == 8) //kaonde
                                 {
                                     $message_string = "*In which District do you live?* \n\n1. Lusaka \n2. Kalomo \n3. Chavuma";
-
+                                    $error_message_string = "⚠️ _You have entered an invalid input!_";
                                 }
 
                                 $update_session = WhatsAppSession::where('session_id', $session_id)->update([
@@ -798,33 +852,42 @@ class WhatsAppSessionController extends Controller
                                     "step_no" => 3
                                 ]);
 
+                                $error_response = $this->sendMessage($error_message_string, $phone_number, $from);
                                 return $this->sendMessage($message_string, $phone_number, $from);
                             }
                         } else {
                             if ($language == 1) //english
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 2) //nyanja
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 3) //bemba
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 4) //tonga
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 5) //Kaonde
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 6) //lunda
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 7) //luvale
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             } elseif ($language == 8) //kaonde
                             {
                                 $message_string = "*What is your gender?* \n\n1. Male\n2. Female\n3. Other\n4. Prefer not to say";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
                             }
 
                             $update_session = WhatsAppSession::where('session_id', $session_id)->update([
@@ -832,6 +895,7 @@ class WhatsAppSessionController extends Controller
                                 "step_no" => 2
                             ]);
 
+                            $error_response = $this->sendMessage($error_message_string, $phone_number, $from);
                             return $this->sendMessage($message_string, $phone_number, $from);
                         }
                     }
