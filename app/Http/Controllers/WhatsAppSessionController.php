@@ -2590,15 +2590,1042 @@ class WhatsAppSessionController extends Controller
 
                         }
                     }
-                case '6'://Next Questions
+                case '6'://Save Question 5
                     if ($case_no == 6 && $step_no == 1 && !empty($user_message)) {
-                        if(is_numeric($user_message))
+                        if(is_numeric($user_message) && $user_message >= 1 && $user_message <= 2)
                         {
+                            if($user_message == 1)
+                            {
+                                $save_data = DataSurvey::create([
+                                    "session_id" => $session_id,
+                                    "phone_number" => $from,
+                                    "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                    "channel" => "WhatsApp",
+                                    "question_number" => "5",
+                                    "question" => "Have you received a COVID-19 vaccine?",
+                                    "answer" => $user_message,
+                                    "answer_value" => "Yes",
+                                    "telecom_operator" => $telecom_operator,
+                                    "data_category" => $data_category
+                                ]);
+
+                                $save_data->save();
+
+                                if ($language == 1) //english
+                                {
+                                    $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                } elseif ($language == 2) //nyanja
+                                {
+                                    $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                } elseif ($language == 3) //bemba
+                                {
+                                    $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                } elseif ($language == 4) //tonga
+                                {
+                                    $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                } elseif ($language == 5) //Kaonde
+                                {
+                                    $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                } elseif ($language == 6) //lunda
+                                {
+                                    $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                } elseif ($language == 7) //luvale
+                                {
+                                    $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                } elseif ($language == 8) //kaonde
+                                {
+                                    $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                }
+
+                                $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                    "case_no" => 7,
+                                    "step_no" => 1 //save
+                                ]);
+
+                                return $this->sendMessage($message_string, $phone_number, $from);
+
+                            }elseif ($user_message == 2)
+                            {
+                                $save_data = DataSurvey::create([
+                                    "session_id" => $session_id,
+                                    "phone_number" => $from,
+                                    "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                    "channel" => "WhatsApp",
+                                    "question_number" => "5",
+                                    "question" => "Have you received a COVID-19 vaccine?",
+                                    "answer" => $user_message,
+                                    "answer_value" => "No",
+                                    "telecom_operator" => $telecom_operator,
+                                    "data_category" => $data_category
+                                ]);
+
+                                $save_data->save();
+
+                                if ($language == 1) //english
+                                {
+                                    $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                } elseif ($language == 2) //nyanja
+                                {
+                                    $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                } elseif ($language == 3) //bemba
+                                {
+                                    $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                } elseif ($language == 4) //tonga
+                                {
+                                    $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                } elseif ($language == 5) //Kaonde
+                                {
+                                    $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                } elseif ($language == 6) //lunda
+                                {
+                                    $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                } elseif ($language == 7) //luvale
+                                {
+                                    $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                } elseif ($language == 8) //kaonde
+                                {
+                                    $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                }
+
+                                $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                    "case_no" => 7,
+                                    "step_no" => 2 //save
+                                ]);
+
+                                return $this->sendMessage($message_string, $phone_number, $from);
+
+                            }
                             //save data
                         }else{
                             //repeat wards question
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Have you received a COVID-19 vaccine?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Have you received a COVID-19 vaccine?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Have you received a COVID-19 vaccine?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Have you received a COVID-19 vaccine?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Have you received a COVID-19 vaccine?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Have you received a COVID-19 vaccine?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Have you received a COVID-19 vaccine?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Have you received a COVID-19 vaccine?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 6,
+                                "step_no" => 1 //save Covid vaccine
+                            ]);
+
+                            $this->sendMessage($error_message_string, $phone_number, $from);
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
                         }
                     }
+
+                    break;
+                case '7':
+                    if($case_no == 7 && $step_no == 1 && !empty($user_message))
+                    {
+                        if(is_numeric($user_message) && $user_message >= 1 && $user_message <= 4)
+                        {
+                            $answer = "Very Concerned";
+
+                            if($user_message == 2)
+                            {
+                                $answer = "Somewhat concerned";
+                            }elseif ($user_message == 3)
+                            {
+                                $answer = "A little concerned";
+                            }elseif ($user_message == 4)
+                            {
+                                $answer = "Not at all concerned";
+                            }
+
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "7",
+                                "question" => "How concerned are you about getting COVID-19?",
+                                "answer" => $user_message,
+                                "answer_value" => $answer,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 8,
+                                "step_no" => 1 //save
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+
+                        }else{
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*How concerned are you about getting COVID-19?*\n\n1. Very Concerned\n2. Somewhat concerned\n3. A little concerned\n4. Not at all concerned";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 7,
+                                "step_no" => 1 //save
+                            ]);
+
+                            $this->sendMessage($error_message_string, $phone_number, $from);
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }
+                    }elseif ($case_no == 7 && $step_no == 2 && !empty($user_message))
+                    {
+                        if(is_numeric($user_message) && $user_message >= 1 && $user_message <= 3)
+                        {
+                            $answer = "Yes, I do want to";
+
+                            if($user_message == 2) {
+                                $answer = "No, you do not want to";
+                            }elseif ($user_message == 3)
+                            {
+                                $answer = "Not sure";
+                            }
+
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "6",
+                                "question" => "Do you want to get a COVID-19 vaccine?",
+                                "answer" => $user_message,
+                                "answer_value" => $answer,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 8,
+                                "step_no" => 1 //save
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+                        }else{
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Do you want to get a COVID-19 vaccine?*\n\n1. Yes, I do want to\n2. No, you do not want to\n3. Not sure";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 7,
+                                "step_no" => 2 //save
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }
+                    }
+                    break;
+                case '8':
+                    if($case_no == 8 && $step_no == 1 && !empty($user_message))
+                    {
+                        if(is_numeric($user_message) && $user_message >= 1 && $user_message <= 4)
+                        {
+                            $answer = "Very important";
+
+                            if($user_message == 2)
+                            {
+                                $answer = "Somewhat important";
+                            }elseif ($user_message == 3)
+                            {
+                                $answer = "A little important";
+                            }elseif ($user_message == 4)
+                            {
+                                $answer = "Not at all important";
+                            }
+
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "8",
+                                "question" => "How important is getting a COVID-19 vaccine for your health?",
+                                "answer" => $user_message,
+                                "answer_value" => $answer,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 9,
+                                "step_no" => 1 //save
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }else{
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*How important is getting a COVID-19 vaccine for your health?*\n\n1. Very important\n2. Somewhat important\n3. A little important\n4. Not at all important";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 8,
+                                "step_no" => 1 //save
+                            ]);
+
+                            $this->sendMessage($error_message_string, $phone_number, $from);
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }
+                    }
+                    break;
+                case '9':
+                    if($case_no == 9 && $step_no == 1 && !empty($user_message))
+                    {
+                        if(is_numeric($user_message) && $user_message >= 1 && $user_message <= 3)
+                        {
+                            $answer = "Yes";
+
+                            if($user_message == 2)
+                            {
+                                $answer = "No";
+                            }elseif ($user_message == 3)
+                            {
+                                $answer = "I don’t know";
+                            }
+
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "9",
+                                "question" => "Have most of your close family and friends received the COVID-19 vaccine?",
+                                "answer" => $user_message,
+                                "answer_value" => $answer,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 10,
+                                "step_no" => 1 //save
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+
+                        }else{
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Have most of your close family and friends received the COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 9,
+                                "step_no" => 1 //save
+                            ]);
+
+                            $this->sendMessage($error_message_string, $phone_number, $from);
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }
+                    }
+                    break;
+                case '10':
+                    if($case_no == 10 && $step_no == 1 && !empty($user_message))
+                    {
+                        if(is_numeric($user_message) && $user_message >= 1 && $user_message <= 3)
+                        {
+                            $answer = "Yes";
+
+                            if($user_message == 2)
+                            {
+                                $answer = "No";
+                            }elseif ($user_message == 3)
+                            {
+                                $answer = "I don’t know";
+                            }
+
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "10",
+                                "question" => "Do you think most of your close family and friends want you to get a COVID-19 vaccine?",
+                                "answer" => $user_message,
+                                "answer_value" => $answer,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 11,
+                                "step_no" => 1 //save
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+
+                        }else{
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Do you think most of your close family and friends want you to get a COVID-19 vaccine?*\n\n1. Yes\n2. No\n3. I don’t know";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 10,
+                                "step_no" => 1 //save
+                            ]);
+
+                            $this->sendMessage($error_message_string, $phone_number, $from);
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+
+                        }
+                    }
+                    break;
+                case '11':
+                    if($case_no == 11 && $step_no == 1 && !empty($user_message))
+                    {
+                        if(is_numeric($user_message) && $user_message >= 1 && $user_message <= 2)
+                        {
+                            $answer = "Yes";
+
+                            if($user_message == 2)
+                            {
+                                $answer = "No";
+                            }
+
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "11",
+                                "question" => "Do you know where to get a COVID-19 vaccine for yourself?",
+                                "answer" => $user_message,
+                                "answer_value" => $answer,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 12,
+                                "step_no" => 1 //save
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+
+                        }else{
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Do you know where to get a COVID-19 vaccine for yourself?*\n\n1. Yes\n2. No";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 11,
+                                "step_no" => 1 //save
+                            ]);
+
+                            $this->sendMessage($error_message_string, $phone_number, $from);
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+
+                        }
+                    }
+                    break;
+                case '12':
+                    if($case_no == 12 && $step_no == 1 && !empty($user_message)){
+                        if(is_numeric($user_message) && $user_message >= 1 && $user_message <= 4)
+                        {
+                            $answer = "Very costly";
+
+                            if($user_message == 2)
+                            {
+                                $answer = "Somewhat costly";
+                            }elseif ($user_message == 3)
+                            {
+                                $answer = "A little costly";
+                            }elseif($user_message == 4)
+                            {
+                                $answer = "Not at all costly";
+                            }
+
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "12",
+                                "question" => "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work?",
+                                "answer" => $user_message,
+                                "answer_value" => $answer,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 13,
+                                "step_no" => 1 //save
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+
+                        }else{
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work.*\n\n1. Very costly\n2. Somewhat costly\n3. A little costly\n4. Not at all costly";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 12,
+                                "step_no" => 1 //save
+                            ]);
+                            $this->sendMessage($error_message_string, $phone_number, $from);
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+
+                        }
+                    }
+                    break;
+                case '13':
+                    if($case_no == 13 && $step_no == 1 && !empty($user_message))
+                    {
+                        if(is_numeric($user_message) && $user_message >= 1 && $user_message <= 4)
+                        {
+                            $answer = "Yes, I have already received a COVID-19 booster";
+
+                            if($user_message == 2)
+                            {
+                                $answer = "Yes, I do want to";
+                            }elseif ($user_message == 3)
+                            {
+                                $answer = "Not sure";
+                            }elseif ($user_message == 4)
+                            {
+                                $answer = "No, I do not want to";
+                            }
+
+                            $save_data = DataSurvey::create([
+                                "session_id" => $session_id,
+                                "phone_number" => $from,
+                                "language_id" => WhatsAppSession::where('session_id', $session_id)->first()->language_id,
+                                "channel" => "WhatsApp",
+                                "question_number" => "13",
+                                "question" => "Do you want to get a COVID-19 booster vaccine?",
+                                "answer" => $user_message,
+                                "answer_value" => $answer,
+                                "telecom_operator" => $telecom_operator,
+                                "data_category" => $data_category
+                            ]);
+
+                            $save_data->save();
+
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*     ~ END ~     *\n_Thank you for participating in the survey_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*     ~ END ~     *\n_Thank you for participating in the survey_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*     ~ END ~     *\n_Thank you for participating in the survey_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*     ~ END ~     *\n_Thank you for participating in the survey_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*     ~ END ~     *\n_Thank you for participating in the survey_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*     ~ END ~     *\n_Thank you for participating in the survey_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*     ~ END ~     *\n_Thank you for participating in the survey_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*     ~ END ~     *\n_Thank you for participating in the survey_";
+                            }
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 13,
+                                "step_no" => 1,
+                                "status" => 1 //terminating session
+                            ]);
+
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }else{
+                            if ($language == 1) //english
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 2) //nyanja
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 3) //bemba
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 4) //tonga
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 5) //Kaonde
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 6) //lunda
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 7) //luvale
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            } elseif ($language == 8) //kaonde
+                            {
+                                $message_string = "*Do you want to get a COVID-19 booster vaccine?*\n\n1. Yes, I have already received a COVID-19 booster\n2. Yes, I do want to\n3. Not sure\n4. No, I do not want to";
+                                $error_message_string = "⚠️ _You have entered an invalid input!_";
+                            }
+
+
+                            $update_session = WhatsAppSession::where('session_id', $session_id)->update([
+                                "case_no" => 13,
+                                "step_no" => 1 //save
+                            ]);
+
+                            $this->sendMessage($error_message_string, $phone_number, $from);
+                            return $this->sendMessage($message_string, $phone_number, $from);
+
+                        }
+                    }
+                    break;
 
             }
         } else {
