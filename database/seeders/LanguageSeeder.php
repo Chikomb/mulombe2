@@ -32,7 +32,7 @@ class LanguageSeeder extends Seeder
                 "is_active" => 1
             ],
             [
-                "name" => "Lozi",
+                "name" => "Kaonde",
                 "is_active" => 1
             ],
             [
@@ -41,10 +41,6 @@ class LanguageSeeder extends Seeder
             ],
             [
                 "name" => "Luvale",
-                "is_active" => 1
-            ],
-            [
-                "name" => "Kaonde",
                 "is_active" => 1
             ]
         ]);
