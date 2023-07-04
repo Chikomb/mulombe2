@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(ApiuserSeeder::class);
-        $this->call(DataSurveySeeder::class);
+        //$this->call(DataSurveySeeder::class);
         $this->call(LanguageSeeder::class);
         $this->call(DataCategorySeeder::class);
         $this->call(APISeeder::class);

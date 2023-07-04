@@ -21,4 +21,11 @@ class DataSurvey extends Model
         'answer_value',
         'data_category' //demo or live
     ];
+
+    public function language()
+    {
+        return $this->belongsTo(Language::class);
+    }
+
+
 }
