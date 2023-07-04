@@ -27,6 +27,39 @@ class SmsSessionController extends Controller
         return $payment_reference_number;
     }
 
+    function get_telecom_operator_name($phone_number)
+    {
+        $mappings = [
+            '096' => 'MTN',
+            '26096' => 'MTN',
+            '076' => 'MTN',
+            '26076' => 'MTN',
+            '+26076' => 'MTN',
+            '+26096' => 'MTN',
+            '095' => 'Zamtel',
+            '26095' => 'Zamtel',
+            '075' => 'Zamtel',
+            '26075' => 'Zamtel',
+            '+26075' => 'Zamtel',
+            '+26095' => 'Zamtel',
+            '097' => 'Airtel',
+            '26097' => 'Airtel',
+            '077' => 'Airtel',
+            '26077' => 'Airtel',
+            '+26077' => 'Airtel',
+            '+26097' => 'Airtel',
+        ];
+
+        foreach ($mappings as $prefix => $operator) {
+            if (str_starts_with($phone_number, $prefix)) {
+                return $operator;
+            }
+        }
+
+        return "Unknown";
+    }
+
+
     public function Sms_Bot(Request $request)
     {
         if ($request) {
@@ -42,14 +75,10 @@ class SmsSessionController extends Controller
 
             $session_id = $this->generateSessionId();
             $data_category = DataCategory::where('is_active', 1)->first()->name;
-            $telecom_operator = "Unknown";
-            if (str_starts_with($phone_number, '096') || str_starts_with($phone_number, '26096') || str_starts_with($phone_number, '076') || str_starts_with($phone_number, '26076')) {
-                $telecom_operator = "MTN";
-            } elseif (str_starts_with($phone_number, '095') || str_starts_with($phone_number, '26095') || str_starts_with($phone_number, '075') || str_starts_with($phone_number, '26075')) {
-                $telecom_operator = "Zamtel";
-            } elseif (str_starts_with($phone_number, '097') || str_starts_with($phone_number, '26097') || str_starts_with($phone_number, '077') || str_starts_with($phone_number, '26077')) {
-                $telecom_operator = "Airtel";
-            }
+
+            $telecom_operator = $this->get_telecom_operator_name($phone_number);
+
+
 
             /*if(SmsSession::where('phone_number', $phone_number)->where('status', 1)->count() > 0)
             {

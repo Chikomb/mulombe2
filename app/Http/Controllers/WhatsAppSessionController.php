@@ -46,6 +46,38 @@ class WhatsAppSessionController extends Controller
 
     }
 
+    function get_telecom_operator_name($phone_number)
+    {
+        $mappings = [
+            '096' => 'MTN',
+            '26096' => 'MTN',
+            '076' => 'MTN',
+            '26076' => 'MTN',
+            '+26076' => 'MTN',
+            '+26096' => 'MTN',
+            '095' => 'Zamtel',
+            '26095' => 'Zamtel',
+            '075' => 'Zamtel',
+            '26075' => 'Zamtel',
+            '+26075' => 'Zamtel',
+            '+26095' => 'Zamtel',
+            '097' => 'Airtel',
+            '26097' => 'Airtel',
+            '077' => 'Airtel',
+            '26077' => 'Airtel',
+            '+26077' => 'Airtel',
+            '+26097' => 'Airtel',
+        ];
+
+        foreach ($mappings as $prefix => $operator) {
+            if (str_starts_with($phone_number, $prefix)) {
+                return $operator;
+            }
+        }
+
+        return "Unknown";
+    }
+
 
     public function WhatsApp_Bot(Request $request)
     {
@@ -68,14 +100,8 @@ class WhatsAppSessionController extends Controller
 
             $session_id = $this->generateSessionId();
             $data_category = DataCategory::where('is_active', 1)->first()->name;
-            $telecom_operator = "Unknown";
-            if (str_starts_with($phone_number, '096') || str_starts_with($phone_number, '26096') || str_starts_with($phone_number, '076') || str_starts_with($phone_number, '26076')) {
-                $telecom_operator = "MTN";
-            } elseif (str_starts_with($phone_number, '095') || str_starts_with($phone_number, '26095') || str_starts_with($phone_number, '075') || str_starts_with($phone_number, '26075')) {
-                $telecom_operator = "Zamtel";
-            } elseif (str_starts_with($phone_number, '097') || str_starts_with($phone_number, '26097') || str_starts_with($phone_number, '077') || str_starts_with($phone_number, '26077')) {
-                $telecom_operator = "Airtel";
-            }
+
+
 
             /*if(WhatsAppSession::where('phone_number', $from)->where('status', 1)->count() > 0)
             {
@@ -227,7 +253,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?",
                                     "answer" => "1",
                                     "answer_value" => "Yes",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -298,7 +324,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "This message is from researchers at MOH, ZNPHI, Akros, AFENET and the US CDC. Are you 18 or older and do we have your consent for this survey?",
                                     "answer" => "2",
                                     "answer_value" => "No",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -407,7 +433,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "What is your age? (Enter in years)",
                                     "answer" => $user_message,
                                     "answer_value" => $user_message,
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -490,7 +516,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "Akros and Ministry of health are conducting a survey(if there’s need to specify the reason, it shall be done here). If you are 18 years or older and wish to proceed, press 1. if not press 2.",
                                     "answer" => "2",
                                     "answer_value" => $user_message,
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -575,7 +601,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "What is your gender?",
                                 "answer" => $user_message,
                                 "answer_value" => $gender,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -671,7 +697,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which District do you live?",
                                     "answer" => "1",
                                     "answer_value" => "Lusaka District",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -721,7 +747,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which District do you live?",
                                     "answer" => $user_message,
                                     "answer_value" => "Kalomo District",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -771,7 +797,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which District do you live?",
                                     "answer" => $user_message,
                                     "answer_value" => "Chavuma District",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -915,7 +941,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which Constituency do you stay in?",
                                     "answer" => $user_message,
                                     "answer_value" => "Chawama Constituency",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -965,7 +991,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which Constituency do you stay in?",
                                     "answer" => $user_message,
                                     "answer_value" => "Kabwata Constituency",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -1015,7 +1041,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which Constituency do you stay in?",
                                     "answer" => $user_message,
                                     "answer_value" => "Kanyama Constituency",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -1065,7 +1091,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "Which Constituency do you live in?",
                                     "answer" => $user_message,
                                     "answer_value" => "Lusaka Central Constituency",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -1115,7 +1141,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which Constituency do you stay in?",
                                     "answer" => $user_message,
                                     "answer_value" => "Mandevu Constituency",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -1165,7 +1191,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which Constituency do you stay in?",
                                     "answer" => $user_message,
                                     "answer_value" => "Matero Constituency",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -1215,7 +1241,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which Constituency do you stay in?",
                                     "answer" => $user_message,
                                     "answer_value" => "Munali Constituency",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -1325,7 +1351,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -1428,7 +1454,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -1526,7 +1552,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -1627,7 +1653,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -1736,7 +1762,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -1839,7 +1865,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -1949,7 +1975,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -2051,7 +2077,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which Constituency do you stay in?",
                                     "answer" => $user_message,
                                     "answer_value" => "Dundumwezi Constituency",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -2104,7 +2130,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "In which Constituency do you stay in?",
                                     "answer" => $user_message,
                                     "answer_value" => "Kalomo Central Constituency",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -2225,7 +2251,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -2350,7 +2376,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -2448,7 +2474,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Constituency do you stay in?",
                                 "answer" => $user_message,
                                 "answer_value" => "Chavuma Constituency",
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -2587,7 +2613,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "In which Ward do you live?",
                                 "answer" => $user_message,
                                 "answer_value" => $ward,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -2686,7 +2712,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "Have you received a COVID-19 vaccine?",
                                     "answer" => $user_message,
                                     "answer_value" => "Yes",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -2736,7 +2762,7 @@ class WhatsAppSessionController extends Controller
                                     "question" => "Have you received a COVID-19 vaccine?",
                                     "answer" => $user_message,
                                     "answer_value" => "No",
-                                    "telecom_operator" => $telecom_operator,
+                                    "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                     "data_category" => $data_category
                                 ]);
 
@@ -2852,7 +2878,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "How concerned are you about getting COVID-19?",
                                 "answer" => $user_message,
                                 "answer_value" => $answer,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -2958,7 +2984,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "Do you want to get a COVID-19 vaccine?",
                                 "answer" => $user_message,
                                 "answer_value" => $answer,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -3067,7 +3093,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "How important is getting a COVID-19 vaccine for your health?",
                                 "answer" => $user_message,
                                 "answer_value" => $answer,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -3176,7 +3202,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "Have most of your close family and friends received the COVID-19 vaccine?",
                                 "answer" => $user_message,
                                 "answer_value" => $answer,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -3286,7 +3312,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "Do you think most of your close family and friends want you to get a COVID-19 vaccine?",
                                 "answer" => $user_message,
                                 "answer_value" => $answer,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -3394,7 +3420,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "Do you know where to get a COVID-19 vaccine for yourself?",
                                 "answer" => $user_message,
                                 "answer_value" => $answer,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -3507,7 +3533,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "Do you find it costly to get a vaccine? Consider clinic costs, transport, or missed work?",
                                 "answer" => $user_message,
                                 "answer_value" => $answer,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 
@@ -3620,7 +3646,7 @@ class WhatsAppSessionController extends Controller
                                 "question" => "Do you want to get a COVID-19 booster vaccine?",
                                 "answer" => $user_message,
                                 "answer_value" => $answer,
-                                "telecom_operator" => $telecom_operator,
+                                "telecom_operator" => $telecom_operator = $this->get_telecom_operator_name($phone_number),
                                 "data_category" => $data_category
                             ]);
 

@@ -33,8 +33,7 @@ class SurveyResource extends JsonResource
     function sesssions($phone_number, $channel)
     {
         $records = DataSurvey::where('phone_number', $phone_number)->where('channel', $channel)->groupBy('session_id')->get();
-        $custom_response = "";
-        $custom_array_block = "";
+        $custom_response = [];
 
         foreach ($records as $group) {
             // Access the grouped records
@@ -43,29 +42,34 @@ class SurveyResource extends JsonResource
             $answered_questions = DataSurvey::where('phone_number', $phone_number)->where('channel', $channel)->groupBy('session_id')->count();
             $total_questions = TotalQuestion::where('channel', $channel)->first()->total_questions;
 
+            $session_array_block = [];
+
             foreach ($session_record as $record) {
-                $custom_array_block = [
-                "telecom_operator"=> "Airtel",
-              "language"=> $record->language->name,
-              "question_number"=> "1",
-              "question"=> "Do we have your consent?",
-              "answer"=> "1",
-              "answer_value"=> "Yes",
-              "data_category"=> "demo",
-              "created_at"=> "2023-07-04T06:30:52.000000Z",
-              "updated_at"=> "2023-07-04T06:30:52.000000Z",
+                $session_array_block[] = [
+                    "telecom_operator" => $record->telecom_operator,
+                    "language" => $record->language->name,
+                    "question_number" => $record->question_number,
+                    "question" => $record->question,
+                    "answer" => $record->answer,
+                    "answer_value" => $record->answer_value,
+                    "data_category" => $record->data_category,
+                    "created_at" => $record->created_at,
+                    "updated_at" => $record->updated_at,
                 ];
             }
 
-            $custom_response = [
+            $custom_response[] = [
                 "session id" => $session_id,
                 "questions answered" => $answered_questions,
                 "total questions" => $total_questions,
                 "survey progress" => $answered_questions."/".$total_questions,
-                "session surveys" => $custom_array_block
+                "session surveys" => $session_array_block
             ];
         }
 
         return $custom_response;
     }
+
+
+
 }
